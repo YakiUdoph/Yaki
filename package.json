@@ -1,0 +1,25 @@
+{
+  "name": "yaki",
+  "version": "0.4.0",
+  "private": true,
+  "type": "module",
+  "description": "Yaki pre-dispatch address review application",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "dev": "node --watch src/app-server.ts",
+    "start": "node src/app-server.ts",
+    "test": "node --test tests/*.test.ts",
+    "test:browser": "node src/browser-e2e.ts",
+    "test:security": "node src/visual-security-audit.ts",
+    "test:vercel": "node --test tests/vercel-functions.test.ts",
+    "test:app-live": "node src/app-live-e2e.ts",
+    "test:live": "node src/live-contract.ts",
+    "test:live-country": "node src/country-policy-live.ts",
+    "test:mcp-auth": "node src/mcp-auth-check.ts"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.64.1"
+  }
+}

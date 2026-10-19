@@ -1,0 +1,148 @@
+{
+  "runAt": "2026-10-19T09:34:44.670Z",
+  "browser": "Google Chrome headless via Playwright, fresh isolated context, extensions disabled",
+  "provider": "explicit mock; no Geoapify quota consumed",
+  "source": {
+    "status": 200,
+    "sha256": "075d46c1cfbd573ac24dd1b1256c62ad1eba44eaa551ddd6cedc0d5ec5d80992",
+    "forbiddenMarkers": []
+  },
+  "network": {
+    "requests": [
+      {
+        "url": "http://127.0.0.1:58595/",
+        "type": "document"
+      },
+      {
+        "url": "http://127.0.0.1:58595/styles.css",
+        "type": "stylesheet"
+      },
+      {
+        "url": "http://127.0.0.1:58595/app.js",
+        "type": "script"
+      },
+      {
+        "url": "http://127.0.0.1:58595/countries.js",
+        "type": "script"
+      },
+      {
+        "url": "http://127.0.0.1:58595/csv.js",
+        "type": "script"
+      },
+      {
+        "url": "http://127.0.0.1:58595/export.js",
+        "type": "script"
+      },
+      {
+        "url": "http://127.0.0.1:58595/review-model.js",
+        "type": "script"
+      },
+      {
+        "url": "http://127.0.0.1:58595/favicon.svg",
+        "type": "other"
+      }
+    ],
+    "externalRequests": [],
+    "webSockets": [],
+    "consoleErrors": []
+  },
+  "securityHeaders": {
+    "contentSecurityPolicy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'",
+    "permissionsPolicy": "camera=(), microphone=(), geolocation=()",
+    "referrerPolicy": "no-referrer",
+    "xContentTypeOptions": "nosniff",
+    "xFrameOptions": "DENY"
+  },
+  "desktop": {
+    "title": "Yaki — The last check before dispatch",
+    "viewportWidth": 1440,
+    "scrollWidth": 1440,
+    "scrollHeight": 3443,
+    "clipped": [],
+    "contrastFailures": [],
+    "scripts": [
+      "http://127.0.0.1:58595/app.js"
+    ],
+    "iframes": [],
+    "walletGlobalPresent": false,
+    "forbiddenMarkers": [],
+    "bodyChildren": [
+      {
+        "tag": "A",
+        "id": "",
+        "visible": true
+      },
+      {
+        "tag": "HEADER",
+        "id": "",
+        "visible": true
+      },
+      {
+        "tag": "MAIN",
+        "id": "top",
+        "visible": true
+      },
+      {
+        "tag": "FOOTER",
+        "id": "",
+        "visible": true
+      },
+      {
+        "tag": "DIALOG",
+        "id": "clear-dialog",
+        "visible": false
+      }
+    ],
+    "followingVisible": [],
+    "footerBottom": 3442.890625
+  },
+  "mobile": {
+    "title": "Yaki — The last check before dispatch",
+    "viewportWidth": 390,
+    "scrollWidth": 390,
+    "scrollHeight": 4736,
+    "clipped": [],
+    "contrastFailures": [],
+    "scripts": [
+      "http://127.0.0.1:58595/app.js"
+    ],
+    "iframes": [],
+    "walletGlobalPresent": false,
+    "forbiddenMarkers": [],
+    "bodyChildren": [
+      {
+        "tag": "A",
+        "id": "",
+        "visible": true
+      },
+      {
+        "tag": "HEADER",
+        "id": "",
+        "visible": true
+      },
+      {
+        "tag": "MAIN",
+        "id": "top",
+        "visible": true
+      },
+      {
+        "tag": "FOOTER",
+        "id": "",
+        "visible": true
+      },
+      {
+        "tag": "DIALOG",
+        "id": "clear-dialog",
+        "visible": false
+      }
+    ],
+    "followingVisible": [],
+    "footerBottom": 4736.015625
+  },
+  "focus": {
+    "target": "skip-link",
+    "outlineWidth": "3px",
+    "outlineStyle": "solid"
+  },
+  "result": "PASS"
+}

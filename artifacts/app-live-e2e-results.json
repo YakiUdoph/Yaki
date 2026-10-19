@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 2,
+  "runAt": "2026-10-19T09:37:16.314Z",
+  "flow": "local browser-facing HTTP server to direct Geoapify geocoding",
+  "baseUrl": "http://127.0.0.1:52111",
+  "checks": [
+    {
+      "input": {
+        "address": "200 Larkin Street, San Francisco, CA 94102, United States",
+        "operatorSelectedCountryCode": "us"
+      },
+      "httpStatus": 200,
+      "applicationStatus": "needs_review",
+      "candidateCount": 2,
+      "candidates": [
+        {
+          "formatted": "Asian Art Museum of San Francisco, 200 Larkin Street, San Francisco, CA 94102, United States of America",
+          "address_line1": "Asian Art Museum of San Francisco",
+          "address_line2": "200 Larkin Street, San Francisco, CA 94102, United States of America",
+          "lon": -122.4159922,
+          "lat": 37.780315,
+          "place_id": "510899bf9d9f9a5ec05904caa65ce1e34240f00102f901052f770100000000c00201920321417369616e20417274204d757365756d206f662053616e204672616e636973636f",
+          "result_type": "amenity",
+          "housenumber": "200",
+          "street": "Larkin Street",
+          "postcode": "94102",
+          "city": "San Francisco",
+          "state": "California",
+          "country": "United States",
+          "country_code": "us",
+          "confidence": 1,
+          "confidence_city_level": 1,
+          "confidence_street_level": 1,
+          "confidence_building_level": 1,
+          "match_type": "inner_part"
+        },
+        {
+          "formatted": "Asian Art Museum Cafe, 200 Larkin Street, San Francisco, CA 94102, United States of America",
+          "address_line1": "Asian Art Museum Cafe",
+          "address_line2": "200 Larkin Street, San Francisco, CA 94102, United States of America",
+          "lon": -122.4160624,
+          "lat": 37.780058,
+          "place_id": "51194630c4a09a5ec059d87dc7f0d8e34240f00103f901792d95a702000000c00201920315417369616e20417274204d757365756d2043616665",
+          "result_type": "amenity",
+          "housenumber": "200",
+          "street": "Larkin Street",
+          "postcode": "94102",
+          "city": "San Francisco",
+          "state": "California",
+          "country": "United States",
+          "country_code": "us",
+          "confidence": 1,
+          "confidence_city_level": 1,
+          "confidence_street_level": 1,
+          "confidence_building_level": 1,
+          "match_type": "inner_part"
+        }
+      ],
+      "policy": {
+        "version": "1.0.0",
+        "status": "review_required",
+        "readyForDispatch": false,
+        "reasons": [
+          "multiple_candidates",
+          "human_confirmation_required"
+        ]
+      }
+    },
+    {
+      "input": {
+        "address": "10 Downing Street, London SW1A 2AA, United Kingdom",
+        "operatorSelectedCountryCode": "gb"
+      },
+      "httpStatus": 200,
+      "applicationStatus": "needs_review",
+      "candidateCount": 1,
+      "candidates": [
+        {
+          "formatted": "10 Downing Street, London, SW1A 2AA, United Kingdom",
+          "address_line1": "10 Downing Street",
+          "address_line2": "London, SW1A 2AA, United Kingdom",
+          "lon": -0.1276965,
+          "lat": 51.5034878,
+          "place_id": "512426a8e15b58c0bf59ae77c94972c04940f00101f90122af1c0000000000c00201920311313020446f776e696e6720537472656574",
+          "result_type": "amenity",
+          "housenumber": "10",
+          "street": "Downing Street",
+          "postcode": "SW1A 2AA",
+          "city": "City of Westminster",
+          "state": "England",
+          "country": "United Kingdom",
+          "country_code": "gb",
+          "confidence": 1,
+          "confidence_city_level": 1,
+          "confidence_street_level": 1,
+          "confidence_building_level": 1,
+          "match_type": "inner_part"
+        }
+      ],
+      "policy": {
+        "version": "1.0.0",
+        "status": "review_required",
+        "readyForDispatch": false,
+        "reasons": [
+          "human_confirmation_required"
+        ]
+      }
+    }
+  ],
+  "credentialExposed": false,
+  "persistence": "none"
+}

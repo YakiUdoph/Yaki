@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Yaki helps delivery coordinators review uncertain addresses before dispatch.">
+    <title>Yaki — The last check before dispatch</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/styles.css">
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to address checker</a>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Yaki home">
+        <span class="brand-mark" aria-hidden="true">Y</span>
+        <span>Yaki</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#how-it-works">How it works</a>
+        <a href="#privacy">Privacy</a>
+        <button class="text-button" id="clear-session-button" type="button">Clear session</button>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Pre-dispatch address review</p>
+          <h1 id="hero-title">The last check before dispatch.</h1>
+          <p class="hero-lead">Review uncertain destinations, compare real location matches, and make a clear human decision before a driver leaves.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#workspace">Check addresses</a>
+            <a class="button button-secondary" href="#how-it-works">See the review flow</a>
+          </div>
+          <ul class="trust-list" aria-label="Product safeguards">
+            <li>Country chosen by you</li>
+            <li>No silent approvals</li>
+            <li>Nothing saved by default</li>
+          </ul>
+        </div>
+        <aside class="flow-card" aria-label="Illustration of the Yaki review flow">
+          <div class="flow-card-header">
+            <span>Review flow</span>
+            <span class="live-dot">Human checked</span>
+          </div>
+          <ol class="flow-steps">
+            <li><span>1</span><div><strong>Original address</strong><small>Kept unchanged for comparison</small></div></li>
+            <li><span>2</span><div><strong>Location candidates</strong><small>Several matches stay visible</small></div></li>
+            <li><span>3</span><div><strong>Your confirmation</strong><small>Required before “Ready”</small></div></li>
+          </ol>
+          <div class="route-motif" aria-hidden="true">
+            <span class="route-point"></span><span class="route-line"></span><span class="route-pin">✓</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="workflow-intro" id="how-it-works" aria-labelledby="workflow-title">
+        <p class="eyebrow">One careful workflow</p>
+        <h2 id="workflow-title">From address list to a dispatch decision</h2>
+        <div class="principle-grid">
+          <article><span>01</span><h3>Set the destination</h3><p>Choose the country first. Yaki never guesses it from your location.</p></article>
+          <article><span>02</span><h3>Inspect real matches</h3><p>See every returned candidate, including coordinates and match information.</p></article>
+          <article><span>03</span><h3>Make the call</h3><p>Select and confirm one result, correct the address, or leave it unresolved.</p></article>
+        </div>
+      </section>
+
+      <section class="workspace-section" id="workspace" aria-labelledby="workspace-title">
+        <div class="section-heading">
+          <div><p class="eyebrow">Address workspace</p><h2 id="workspace-title">Check before you dispatch</h2></div>
+          <p>Files stay in this browser session. Only the address being checked and your selected country are sent to Geoapify.</p>
+        </div>
+
+        <div id="global-message" class="message" role="status" aria-live="polite" hidden></div>
+
+        <div class="setup-grid">
+          <section class="panel destination-panel" aria-labelledby="destination-title">
+            <div class="panel-number">1</div>
+            <div class="panel-content">
+              <h3 id="destination-title">Choose the destination country</h3>
+              <p>This restriction applies to every address in the current queue.</p>
+              <label for="country-select">Destination country <span aria-hidden="true">*</span></label>
+              <select id="country-select" required>
+                <option value="">Select a country</option>
+              </select>
+              <p class="field-hint">Required. Yaki will not infer a country for you.</p>
+            </div>
+          </section>
+
+          <section class="panel" aria-labelledby="single-title">
+            <div class="panel-number">2A</div>
+            <div class="panel-content">
+              <h3 id="single-title">Check one address</h3>
+              <form id="single-address-form">
+                <label for="single-address">Address</label>
+                <textarea id="single-address" maxlength="1024" rows="3" placeholder="Street, building number, city, postcode" required></textarea>
+                <button class="button button-primary" type="submit">Add and check</button>
+              </form>
+            </div>
+          </section>
+
+          <section class="panel upload-panel" aria-labelledby="upload-title">
+            <div class="panel-number">2B</div>
+            <div class="panel-content">
+              <h3 id="upload-title">Or upload a CSV</h3>
+              <p>Up to 500 rows and 1 MB. You choose which column contains the address.</p>
+              <label class="file-drop" for="csv-file">
+                <span class="file-icon" aria-hidden="true">⇧</span>
+                <strong>Choose a CSV file</strong>
+                <small id="file-label">No file selected</small>
+              </label>
+              <input id="csv-file" class="visually-hidden" type="file" accept=".csv,text/csv">
+            </div>
+          </section>
+        </div>
+
+        <section id="csv-preview-panel" class="panel csv-preview" aria-labelledby="csv-preview-title" hidden>
+          <div class="preview-heading">
+            <div><p class="eyebrow">Import preview</p><h3 id="csv-preview-title">Confirm the address column</h3></div>
+            <div class="inline-field"><label for="address-column">Address column</label><select id="address-column"></select></div>
+          </div>
+          <div id="csv-errors" class="validation-list" role="alert" hidden></div>
+          <div class="table-wrap"><table><caption>First five valid CSV rows</caption><thead id="preview-head"></thead><tbody id="preview-body"></tbody></table></div>
+          <div class="panel-actions"><span id="row-count"></span><button class="button button-primary" id="import-button" type="button">Add rows and check</button></div>
+        </section>
+
+        <section class="queue-section" aria-labelledby="queue-title">
+          <div class="queue-header">
+            <div><p class="eyebrow">Review queue</p><h3 id="queue-title">Address decisions</h3></div>
+            <div class="queue-actions">
+              <button class="button button-secondary" id="export-ready" type="button" disabled>Export ready</button>
+              <button class="button button-secondary" id="export-unresolved" type="button" disabled>Export unresolved</button>
+            </div>
+          </div>
+          <div class="status-tabs" role="toolbar" aria-label="Filter review queue">
+            <button class="status-tab active" type="button" data-filter="all" aria-pressed="true">All <span id="count-all">0</span></button>
+            <button class="status-tab" type="button" data-filter="needs_review" aria-pressed="false">Needs review <span id="count-review">0</span></button>
+            <button class="status-tab" type="button" data-filter="ready" aria-pressed="false">Ready <span id="count-ready">0</span></button>
+            <button class="status-tab" type="button" data-filter="no_match" aria-pressed="false">No match <span id="count-no-match">0</span></button>
+            <button class="status-tab" type="button" data-filter="check_failed" aria-pressed="false">Check failed <span id="count-failed">0</span></button>
+          </div>
+          <div id="batch-progress" class="progress" role="status" aria-live="polite" hidden></div>
+          <div id="queue-empty" class="empty-state">
+            <div aria-hidden="true">⌖</div><h4>No addresses to review yet</h4><p>Add one address or import a CSV to begin.</p>
+          </div>
+          <div id="record-list" class="record-list"></div>
+        </section>
+      </section>
+
+      <section class="privacy-section" id="privacy" aria-labelledby="privacy-title">
+        <div><p class="eyebrow">Privacy by default</p><h2 id="privacy-title">A temporary workspace, not a customer database.</h2></div>
+        <div class="privacy-copy"><p>Yaki keeps your imported file, review choices, and history in browser memory only. Refreshing or clearing the session removes them. The server does not store address requests.</p><p>No analytics, session replay, advertising scripts, external fonts, or hidden location requests are included.</p></div>
+      </section>
+    </main>
+
+    <footer>
+      <div><a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">Y</span><span>Yaki</span></a><p>The last check before dispatch.</p></div>
+      <div class="attribution"><span>Powered by <a href="https://www.geoapify.com/" target="_blank" rel="noreferrer">Geoapify</a></span><span>© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a></span></div>
+    </footer>
+
+    <dialog id="clear-dialog" aria-labelledby="clear-title">
+      <form method="dialog">
+        <h2 id="clear-title">Clear this session?</h2>
+        <p>This removes the imported file, address queue, decisions, and review history from this browser.</p>
+        <div class="dialog-actions"><button class="button button-secondary" value="cancel">Keep session</button><button class="button button-danger" id="confirm-clear" value="confirm">Clear everything</button></div>
+      </form>
+    </dialog>
+  </body>
+</html>

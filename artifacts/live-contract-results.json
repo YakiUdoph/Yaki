@@ -1,0 +1,350 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-10-18T20:19:05.526Z",
+  "completedAt": "2026-10-18T20:19:18.512Z",
+  "keySource": ".env:GEOAPIFY_API_KEY (value intentionally omitted)",
+  "directAuthentication": "x-api-key header",
+  "mcpAuthentication": "x-api-key header",
+  "protocolVersion": "2025-06-18",
+  "mcpToolNames": [
+    "geocode_address",
+    "geocode_structured_address",
+    "reverse_geocode_coordinates",
+    "search_places",
+    "list_place_categories",
+    "calculate_route",
+    "calculate_route_matrix",
+    "combine_geometries",
+    "evaluate_spatial_relation",
+    "measure_geometry",
+    "transform_geometry"
+  ],
+  "confidenceDisclaimer": "Geoapify confidence and match fields are geocoding evidence, not delivery certainty.",
+  "cases": [
+    {
+      "id": "complete-public-address",
+      "kind": "complete",
+      "query": "200 Larkin Street, San Francisco, CA 94102, United States",
+      "direct": {
+        "source": "direct",
+        "candidates": [
+          {
+            "formatted": "Asian Art Museum of San Francisco, 200 Larkin Street, San Francisco, CA 94102, United States of America",
+            "address_line1": "Asian Art Museum of San Francisco",
+            "address_line2": "200 Larkin Street, San Francisco, CA 94102, United States of America",
+            "lon": -122.4159922,
+            "lat": 37.780315,
+            "place_id": "510899bf9d9f9a5ec05904caa65ce1e34240f00102f901052f770100000000c00201920321417369616e20417274204d757365756d206f662053616e204672616e636973636f",
+            "result_type": "amenity",
+            "housenumber": "200",
+            "street": "Larkin Street",
+            "postcode": "94102",
+            "city": "San Francisco",
+            "state": "California",
+            "country": "United States",
+            "country_code": "us",
+            "confidence": 1,
+            "confidence_city_level": 1,
+            "confidence_street_level": 1,
+            "confidence_building_level": 1,
+            "match_type": "inner_part"
+          },
+          {
+            "formatted": "Asian Art Museum Cafe, 200 Larkin Street, San Francisco, CA 94102, United States of America",
+            "address_line1": "Asian Art Museum Cafe",
+            "address_line2": "200 Larkin Street, San Francisco, CA 94102, United States of America",
+            "lon": -122.4160624,
+            "lat": 37.780058,
+            "place_id": "51194630c4a09a5ec059d87dc7f0d8e34240f00103f901792d95a702000000c00201920315417369616e20417274204d757365756d2043616665",
+            "result_type": "amenity",
+            "housenumber": "200",
+            "street": "Larkin Street",
+            "postcode": "94102",
+            "city": "San Francisco",
+            "state": "California",
+            "country": "United States",
+            "country_code": "us",
+            "confidence": 1,
+            "confidence_city_level": 1,
+            "confidence_street_level": 1,
+            "confidence_building_level": 1,
+            "match_type": "inner_part"
+          }
+        ],
+        "parsedQuery": {
+          "housenumber": "200",
+          "street": "larkin street",
+          "postcode": "94102",
+          "city": "san francisco",
+          "state": "ca",
+          "country": "united states",
+          "expected_type": "building"
+        }
+      },
+      "mcp": {
+        "source": "mcp",
+        "candidates": [
+          {
+            "formatted": "Asian Art Museum of San Francisco, 200 Larkin Street, San Francisco, CA 94102, United States of America",
+            "address_line1": "Asian Art Museum of San Francisco",
+            "address_line2": "200 Larkin Street, San Francisco, CA 94102, United States of America",
+            "lon": -122.4159922,
+            "lat": 37.780315,
+            "place_id": "510899bf9d9f9a5ec05904caa65ce1e34240f00102f901052f770100000000c00201920321417369616e20417274204d757365756d206f662053616e204672616e636973636f",
+            "result_type": "amenity",
+            "housenumber": "200",
+            "street": "Larkin Street",
+            "postcode": "94102",
+            "city": "San Francisco",
+            "state": "California",
+            "country": "United States",
+            "country_code": "us",
+            "confidence": 1,
+            "confidence_city_level": 1,
+            "confidence_street_level": 1,
+            "confidence_building_level": 1,
+            "match_type": "inner_part"
+          },
+          {
+            "formatted": "Asian Art Museum Cafe, 200 Larkin Street, San Francisco, CA 94102, United States of America",
+            "address_line1": "Asian Art Museum Cafe",
+            "address_line2": "200 Larkin Street, San Francisco, CA 94102, United States of America",
+            "lon": -122.4160624,
+            "lat": 37.780058,
+            "place_id": "51194630c4a09a5ec059d87dc7f0d8e34240f00103f901792d95a702000000c00201920315417369616e20417274204d757365756d2043616665",
+            "result_type": "amenity",
+            "housenumber": "200",
+            "street": "Larkin Street",
+            "postcode": "94102",
+            "city": "San Francisco",
+            "state": "California",
+            "country": "United States",
+            "country_code": "us",
+            "confidence": 1,
+            "confidence_city_level": 1,
+            "confidence_street_level": 1,
+            "confidence_building_level": 1,
+            "match_type": "inner_part"
+          }
+        ],
+        "normalizedQuery": "200 Larkin Street, San Francisco, CA 94102, United States"
+      },
+      "comparison": {
+        "directCandidateCount": 2,
+        "mcpCandidateCount": 2,
+        "topPlaceIdEqual": true,
+        "topCoordinateDistanceMeters": 0,
+        "candidatePlaceIdOverlapCount": 2,
+        "directHasParsedQuery": true,
+        "mcpHasParsedQuery": false
+      }
+    },
+    {
+      "id": "ambiguous-location",
+      "kind": "ambiguous",
+      "query": "Springfield",
+      "direct": {
+        "source": "direct",
+        "candidates": [],
+        "parsedQuery": {
+          "city": "springfield",
+          "expected_type": "unknown"
+        }
+      },
+      "mcp": {
+        "source": "mcp",
+        "candidates": [
+          {
+            "formatted": "Springfield, VT, United States of America",
+            "address_line1": "Springfield",
+            "address_line2": "Springfield, VT, United States of America",
+            "lon": -72.478095,
+            "lat": 43.296139,
+            "place_id": "516458c51b991e52c059fa08fce1e7a54540f00101f9010a27150100000000c0020792030830353135362b7573",
+            "result_type": "postcode",
+            "postcode": "05156",
+            "city": "Springfield",
+            "county": "Windsor County",
+            "state": "Vermont",
+            "country": "United States",
+            "country_code": "us",
+            "confidence": 1,
+            "confidence_city_level": 1,
+            "match_type": "full_match"
+          },
+          {
+            "formatted": "Springfield Reservoir Dam, Weathersfield, VT 05151, United States of America",
+            "address_line1": "Springfield Reservoir Dam",
+            "address_line2": "Weathersfield, VT 05151, United States of America",
+            "lon": -72.4895028,
+            "lat": 43.3511965,
+            "place_id": "513a538d03541f52c0591efcc401f4ac4540f00102f901b041ba4800000000c00201920319537072696e676669656c64205265736572766f69722044616d",
+            "result_type": "amenity",
+            "postcode": "05151",
+            "city": "Weathersfield",
+            "county": "Windsor County",
+            "state": "Vermont",
+            "country": "United States",
+            "country_code": "us",
+            "confidence": 1,
+            "match_type": "full_match"
+          },
+          {
+            "formatted": "Springfield Town Forest, Springfield, NH, United States of America",
+            "address_line1": "Springfield Town Forest",
+            "address_line2": "Springfield, NH, United States of America",
+            "lon": -72.0670475,
+            "lat": 43.5417604,
+            "place_id": "51d4f198814a0452c0594a22a06758c54540f00102f901f054d90200000000c00201920317537072696e676669656c6420546f776e20466f72657374",
+            "result_type": "amenity",
+            "city": "Springfield",
+            "county": "Sullivan County",
+            "state": "New Hampshire",
+            "country": "United States",
+            "country_code": "us",
+            "confidence": 1,
+            "match_type": "full_match"
+          },
+          {
+            "formatted": "Springfield Town Forest, Springfield, VT, United States of America",
+            "address_line1": "Springfield Town Forest",
+            "address_line2": "Springfield, VT, United States of America",
+            "lon": -72.465398,
+            "lat": 43.3081392,
+            "place_id": "51ec67b114c91d52c059cc4ef51a71a74540f00102f90111e9a34500000000c00201920317537072696e676669656c6420546f776e20466f72657374",
+            "result_type": "amenity",
+            "city": "Springfield",
+            "county": "Windsor County",
+            "state": "Vermont",
+            "country": "United States",
+            "country_code": "us",
+            "confidence": 1,
+            "match_type": "full_match"
+          },
+          {
+            "formatted": "Springfield Police, 2750 Main Street, West Springfield, Springfield, NH 03284, United States of America",
+            "address_line1": "Springfield Police",
+            "address_line2": "2750 Main Street, West Springfield, Springfield, NH 03284, United States of America",
+            "lon": -72.047466,
+            "lat": 43.4929845,
+            "place_id": "51016bd5ae090352c059ab77b81d1abf4540f00103f9010e758be100000000c00201920312537072696e676669656c6420506f6c696365",
+            "result_type": "amenity",
+            "housenumber": "2750",
+            "street": "Main Street",
+            "postcode": "03284",
+            "city": "Springfield",
+            "county": "Sullivan County",
+            "state": "New Hampshire",
+            "country": "United States",
+            "country_code": "us",
+            "confidence": 1,
+            "match_type": "full_match"
+          }
+        ],
+        "normalizedQuery": "Springfield"
+      },
+      "comparison": {
+        "directCandidateCount": 0,
+        "mcpCandidateCount": 5,
+        "candidatePlaceIdOverlapCount": 0,
+        "directHasParsedQuery": true,
+        "mcpHasParsedQuery": false
+      }
+    },
+    {
+      "id": "incomplete-address",
+      "kind": "incomplete",
+      "query": "10 Downing Street",
+      "direct": {
+        "source": "direct",
+        "candidates": [
+          {
+            "formatted": "10 Downing Street, London, SW1A 2AA, United Kingdom",
+            "address_line1": "10 Downing Street",
+            "address_line2": "London, SW1A 2AA, United Kingdom",
+            "lon": -0.1276965,
+            "lat": 51.5034878,
+            "place_id": "512426a8e15b58c0bf59ae77c94972c04940f00101f90122af1c0000000000c00201920311313020446f776e696e6720537472656574",
+            "result_type": "amenity",
+            "housenumber": "10",
+            "street": "Downing Street",
+            "postcode": "SW1A 2AA",
+            "city": "City of Westminster",
+            "state": "England",
+            "country": "United Kingdom",
+            "country_code": "gb",
+            "confidence": 1,
+            "confidence_street_level": 1,
+            "confidence_building_level": 1,
+            "match_type": "inner_part"
+          }
+        ],
+        "parsedQuery": {
+          "housenumber": "10",
+          "street": "downing street",
+          "expected_type": "building"
+        }
+      },
+      "mcp": {
+        "source": "mcp",
+        "candidates": [
+          {
+            "formatted": "10 Downing Street, London, SW1A 2AA, United Kingdom",
+            "address_line1": "10 Downing Street",
+            "address_line2": "London, SW1A 2AA, United Kingdom",
+            "lon": -0.1276965,
+            "lat": 51.5034878,
+            "place_id": "512426a8e15b58c0bf59ae77c94972c04940f00101f90122af1c0000000000c00201920311313020446f776e696e6720537472656574",
+            "result_type": "amenity",
+            "housenumber": "10",
+            "street": "Downing Street",
+            "postcode": "SW1A 2AA",
+            "city": "City of Westminster",
+            "state": "England",
+            "country": "United Kingdom",
+            "country_code": "gb",
+            "confidence": 1,
+            "confidence_street_level": 1,
+            "confidence_building_level": 1,
+            "match_type": "inner_part"
+          }
+        ],
+        "normalizedQuery": "10 Downing Street"
+      },
+      "comparison": {
+        "directCandidateCount": 1,
+        "mcpCandidateCount": 1,
+        "topPlaceIdEqual": true,
+        "topCoordinateDistanceMeters": 0,
+        "candidatePlaceIdOverlapCount": 1,
+        "directHasParsedQuery": true,
+        "mcpHasParsedQuery": false
+      }
+    },
+    {
+      "id": "invalid-address",
+      "kind": "invalid",
+      "query": "this-is-not-a-real-address-yaki-7f3c91",
+      "direct": {
+        "source": "direct",
+        "candidates": [],
+        "parsedQuery": {
+          "postcode": "this-is-not-a-real-address-yaki-7f3c91",
+          "expected_type": "unknown"
+        }
+      },
+      "mcp": {
+        "source": "mcp",
+        "candidates": [],
+        "normalizedQuery": "this-is-not-a-real-address-yaki-7f3c91"
+      },
+      "comparison": {
+        "directCandidateCount": 0,
+        "mcpCandidateCount": 0,
+        "candidatePlaceIdOverlapCount": 0,
+        "directHasParsedQuery": true,
+        "mcpHasParsedQuery": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "runAt": "2026-10-19T09:35:31.342Z",
+  "browser": "Microsoft Edge headless via Playwright, fresh isolated context",
+  "provider": "explicit mock; no Geoapify quota consumed",
+  "scenarios": {
+    "keyboardSkipLink": "PASS",
+    "countrySelection": "PASS",
+    "addressCheck": "PASS",
+    "ambiguousCandidatesPreserved": "PASS",
+    "candidateSelection": "PASS",
+    "explicitHumanConfirmation": "PASS",
+    "reviewHistory": "PASS",
+    "readyCsvExport": "PASS",
+    "csvUploadAndPreview": "PASS",
+    "csvBatchCheck": "PASS",
+    "unresolvedCsvExport": "PASS",
+    "mobile390NoHorizontalOverflow": "PASS",
+    "clearSession": "PASS"
+  }
+}
