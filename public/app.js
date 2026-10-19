@@ -1,6 +1,7 @@
 import { countryOptions } from "./countries.js";
 import { CsvValidationError, parseCsv } from "./csv.js";
 import { partitionRecords, recordsToCsv } from "./export.js";
+import { AddressApiRequestError, requestAddressCheck } from "./api-client.js";
 import {
   REVIEW_STATUSES,
   applyCheckFailure,
@@ -304,12 +305,10 @@ async function runCheck(id) {
   replaceRecord(checking);
   renderQueue();
   try {
-    const response = await fetch("/api/geocode", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ address: checking.workingAddress, countryCode: state.countryCode }),
+    const { response, body } = await requestAddressCheck({
+      address: checking.workingAddress,
+      countryCode: state.countryCode,
     });
-    const body = await response.json();
     const latest = state.records.find((item) => item.id === id);
     if (!latest) return;
     if (!response.ok || body.status === "check_failed") {
@@ -317,14 +316,20 @@ async function runCheck(id) {
     } else {
       replaceRecord(applyCheckResult(latest, body));
     }
-  } catch {
+  } catch (error) {
+    const failure = error instanceof AddressApiRequestError
+      ? error.publicError
+      : {
+          category: "unexpected",
+          message: "Yaki could not complete the address check. Retry shortly.",
+          retryable: true,
+        };
+    console.error("Yaki address API request failed.", error instanceof AddressApiRequestError
+      ? error.diagnostics
+      : { endpoint: "/api/geocode", failure: "unexpected" });
     const latest = state.records.find((item) => item.id === id);
     if (latest) {
-      replaceRecord(applyCheckFailure(latest, {
-        category: "network",
-        message: "Yaki could not reach its local address service. Check that the server is running, then retry.",
-        retryable: true,
-      }));
+      replaceRecord(applyCheckFailure(latest, failure));
     }
   }
   renderQueue();

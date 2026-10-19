@@ -108,4 +108,4 @@ export function createGeocodeFunction(options: {
   };
 }
 
-export default { fetch: createGeocodeFunction() };
+export const POST = createGeocodeFunction();

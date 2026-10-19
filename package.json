@@ -10,16 +10,20 @@
   "scripts": {
     "dev": "node --watch src/app-server.ts",
     "start": "node src/app-server.ts",
+    "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.ts",
     "test:browser": "node src/browser-e2e.ts",
     "test:security": "node src/visual-security-audit.ts",
     "test:vercel": "node --test tests/vercel-functions.test.ts",
+    "test:vercel-live": "node --env-file=.env --test tests/vercel-live.test.ts",
     "test:app-live": "node src/app-live-e2e.ts",
     "test:live": "node src/live-contract.ts",
     "test:live-country": "node src/country-policy-live.ts",
     "test:mcp-auth": "node src/mcp-auth-check.ts"
   },
   "devDependencies": {
-    "playwright-core": "^1.64.1"
+    "@types/node": "^24.19.2",
+    "playwright-core": "^1.64.1",
+    "typescript": "^5.9.3"
   }
 }

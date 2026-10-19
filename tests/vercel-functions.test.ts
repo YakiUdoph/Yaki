@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import health from "../api/health.ts";
-import { createGeocodeFunction } from "../api/geocode.ts";
+import { GET as healthGET, HEAD as healthHEAD } from "../api/health.ts";
+import { POST, createGeocodeFunction } from "../api/geocode.ts";
 import { MemoryRateLimiter } from "../src/request-policy.ts";
 
 const result = {
@@ -29,6 +29,7 @@ function request(body: unknown, headers: Record<string, string> = {}): Request {
 }
 
 test("Vercel geocode function preserves the address-review contract", async () => {
+  assert.equal(typeof POST, "function");
   let calls = 0;
   const fetch = createGeocodeFunction({
     limiter: new MemoryRateLimiter(10, 60_000),
@@ -83,14 +84,15 @@ test("Vercel geocode function applies a bounded per-instance rate limit", async 
   assert.equal(limited.headers.get("retry-after"), "60");
 });
 
-test("Vercel health function exposes no secret and enforces methods", async () => {
-  const response = health.fetch(new Request("https://yaki.example/api/health"));
+test("Vercel health function exposes no secret through GET and HEAD", async () => {
+  const response = healthGET();
   assert.equal(response.status, 200);
   assert.deepEqual(await response.json(), {
     status: "ok",
     persistence: "none",
     runtime: "vercel-function",
   });
-  const denied = health.fetch(new Request("https://yaki.example/api/health", { method: "POST" }));
-  assert.equal(denied.status, 405);
+  const head = healthHEAD();
+  assert.equal(head.status, 200);
+  assert.equal(await head.text(), "");
 });
