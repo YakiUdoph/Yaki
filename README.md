@@ -6,6 +6,8 @@ The repository supports local development and Vercel deployment. Yaki does not c
 
 Public application: [https://yaki-seven.vercel.app/](https://yaki-seven.vercel.app/)
 
+**Batch #2 tutorial:** [Which Springfield? Building Yaki, the Last Check Before Dispatch](docs/geoapify-batch2-tutorial.md) · [Live application](https://yaki-seven.vercel.app/) · [Reproducible walkthrough](docs/demo-walkthrough.md) · [Geoapify](https://www.geoapify.com/)
+
 ![Yaki desktop interface](artifacts/screenshots/yaki-desktop.png)
 
 ## Why Yaki exists
@@ -157,8 +159,10 @@ The application visibly includes `Powered by Geoapify` and `© OpenStreetMap con
 
 ## Documentation
 
+- [Batch #2 tutorial — Which Springfield?](docs/geoapify-batch2-tutorial.md)
 - [Architecture and data handling](docs/architecture.md)
 - [Demo walkthrough](docs/demo-walkthrough.md)
+- [Final submission draft](docs/final-submission-draft.md)
 - [Phase 3 test report](docs/phase3-test-report.md)
 - [Phase 3B visual/security audit](docs/phase3b-visual-security-audit.md)
 - [Vercel deployment and release guide](docs/deployment.md)

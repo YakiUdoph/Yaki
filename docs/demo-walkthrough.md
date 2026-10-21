@@ -4,6 +4,8 @@ This walkthrough starts from a clean checkout and uses public addresses. It demo
 
 Yaki uses the [Geoapify location platform](https://www.geoapify.com/) for candidate lookup. The public application is available at [https://yaki-seven.vercel.app/](https://yaki-seven.vercel.app/).
 
+For the development narrative, Springfield case study, direct API/MCP comparison, and evidence boundaries, read [Which Springfield? Building Yaki, the Last Check Before Dispatch](geoapify-batch2-tutorial.md).
+
 Provider data can change. Candidate text, order, and count below are examples from the recorded 2026-10-19 run, not fixed assertions for future runs.
 
 ## Prerequisites
@@ -87,10 +89,14 @@ The important outcome is the state transition, not a particular candidate count:
 ```powershell
 # Offline unit and HTTP integration suite
 npm.cmd ci
+npm.cmd run typecheck
 npm.cmd test
 
 # Real Chrome or Edge interaction through Playwright with a deliberate mock provider
 npm.cmd run test:browser
+
+# Clean-profile visual and security browser audit
+npm.cmd run test:security
 
 # Vercel Function contract tests
 npm.cmd run test:vercel
@@ -107,6 +113,8 @@ Expected results from the recorded 2026-10-19 release-candidate run:
 - `npm.cmd run test:app-live`: two HTTP `200` responses, both retained as `needs_review`, with `credentialExposed: false` and `persistence: none` in the artifact.
 
 The browser test uses an explicit mock and consumes no Geoapify quota. The live test writes sanitized evidence to `artifacts/app-live-e2e-results.json`.
+
+The current Phase 5A automated baseline, executed on 2026-10-21, discovered 47 tests: 46 passed, 0 failed, and the credential-gated live case was skipped. The focused Vercel Function suite passed 4/4, and both browser checks passed. Keep these current results separate from the historical 2026-10-19 results above.
 
 To check the production deployment:
 

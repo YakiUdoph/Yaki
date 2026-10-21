@@ -1,5 +1,5 @@
 {
-  "runAt": "2026-10-21T20:33:14.052Z",
+  "runAt": "2026-10-21T22:37:19.550Z",
   "browser": "Microsoft Edge headless via Playwright, fresh isolated context",
   "provider": "explicit mock; no Geoapify quota consumed",
   "scenarios": {
