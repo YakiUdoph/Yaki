@@ -1,3 +1,5 @@
+import { isReadyForExport } from "./review-model.js";
+
 const FORMULA_PREFIX = /^[\t\r ]*[=+\-@]/u;
 
 export function protectSpreadsheetCell(value) {
@@ -45,7 +47,7 @@ export function recordsToCsv(records) {
 
 export function partitionRecords(records) {
   return {
-    approved: records.filter((record) => record.status === "ready"),
-    unresolved: records.filter((record) => record.status !== "ready"),
+    approved: records.filter(isReadyForExport),
+    unresolved: records.filter((record) => !isReadyForExport(record)),
   };
 }

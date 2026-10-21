@@ -4,6 +4,8 @@
 
 The repository supports local development and Vercel deployment. Yaki does not claim postal validation, deliverability, entrance accuracy, or driver safety, and it is not approved for real customer data without the privacy and operational work listed below.
 
+Public application: [https://yaki-seven.vercel.app/](https://yaki-seven.vercel.app/)
+
 ![Yaki desktop interface](artifacts/screenshots/yaki-desktop.png)
 
 ## Why Yaki exists
@@ -116,8 +118,8 @@ npm.cmd run test:vercel
 # Two real public-address requests through the local HTTP application
 npm.cmd run test:app-live
 
-# Run the same live checks against a deployed URL
-$env:YAKI_BASE_URL="https://your-project.vercel.app"
+# Run the same live checks against the production deployment
+$env:YAKI_BASE_URL="https://yaki-seven.vercel.app"
 npm.cmd run test:app-live
 
 # Earlier direct/MCP contract verification commands
@@ -126,11 +128,15 @@ npm.cmd run test:live-country
 npm.cmd run test:live
 ```
 
-Latest executed outcomes (2026-10-19, local release-candidate verification):
+Latest executed local outcomes (2026-10-21, Phase 5A verification):
 
-- Automated suite: **37 passed, 0 failed**.
-- Browser E2E: **PASS** for keyboard focus, country selection, ambiguous candidates, selection, confirmation, history, 390px layout, and clear session.
-- Live application E2E: **PASS** for two public addresses; candidates remained `needs_review`, with no automatic approval or credential exposure.
+- TypeScript check: **PASS**.
+- Automated suite: **46 passed, 0 failed, 1 credential-gated live test skipped** (47 discovered).
+- Focused Vercel Function contracts: **4 passed, 0 failed**.
+- Browser E2E: **PASS** for keyboard focus, country selection, ambiguous candidates, policy-blocked clarification, candidate-change re-confirmation, ready/unresolved export, 390px layout, and clear session.
+- Clean-profile visual/security browser audit: **PASS**.
+
+Historical live application evidence from 2026-10-19 remains **PASS** for two public addresses; candidates remained `needs_review`, with no automatic approval or credential exposure. That historical result is not evidence for the current production deployment.
 
 Full evidence and honest failure history are in [docs/phase3-test-report.md](docs/phase3-test-report.md). Screenshots are under `artifacts/screenshots/`.
 
@@ -147,7 +153,7 @@ Do not use real customer data until lawful basis, privacy notice, endpoint/regio
 
 ## Attribution
 
-The application visibly includes `Powered by Geoapify` and `© OpenStreetMap contributors`. No map tiles or OpenMapTiles-based styles are loaded. Attribution must be reassessed if the map implementation changes.
+The application visibly includes `Powered by Geoapify` and `© OpenStreetMap contributors`. Learn more at the [Geoapify website](https://www.geoapify.com/). No map tiles or OpenMapTiles-based styles are loaded. Attribution must be reassessed if the map implementation changes.
 
 ## Documentation
 
@@ -174,7 +180,7 @@ The application visibly includes `Powered by Geoapify` and `© OpenStreetMap con
 - In-memory rate limiting is not globally consistent across serverless instances; production abuse controls require Vercel Firewall or shared state.
 - Formal accessibility and legal/privacy audits remain outstanding.
 - Provider results and rankings can change; captured results are not an accuracy guarantee.
-- No public Vercel deployment has been verified yet; the repository is a tested release candidate, not a live-service claim.
+- The public deployment is a reviewed demonstration, not approval for real customer data; distributed abuse protection, monitoring, privacy, and operational controls still require production review.
 
 ## License
 

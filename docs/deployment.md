@@ -1,11 +1,12 @@
 # GitHub and Vercel release guide
 
-This is an operator guide for a future public release. As of 2026-10-19, the GitHub target exists as a public empty repository, no Yaki Vercel project or production URL has been created, and only local and contract-test results are available. Follow the checks in order; do not turn a configured target into a claim that deployment succeeded.
+This is the operator guide for the public GitHub and Vercel release. The repository and production deployment now exist; every later release must still be tied to an exact commit and verified independently rather than inferred from an earlier successful deployment.
 
 ## Release targets
 
 - GitHub repository: `https://github.com/YakiUdoph/Yaki`
 - Vercel project name: `yaki`
+- Production URL: `https://yaki-seven.vercel.app/`
 - Production branch: `main`
 - Runtime: Node.js Vercel Functions plus static files from `public/`
 
@@ -38,7 +39,7 @@ vercel.cmd build --prod
 
 `test:browser` and `test:security` use Playwright with clean, isolated browser contexts and extensions disabled. `test:app-live` uses real public addresses and consumes Geoapify quota.
 
-Expected local release-candidate result: 37 automated tests pass; both browser checks report `PASS`; the live application check records two public addresses as `needs_review` without exposing the credential. `vercel build --prod` has no valid expected result until `vercel pull` has obtained project settings from a linked Vercel project.
+Most recent local result (2026-10-21): TypeScript passed; the automated command discovered 47 tests with 46 passed, 0 failed, and one credential-gated live test skipped; the focused Vercel Function suite passed 4/4; and both browser checks reported `PASS`. Historical 2026-10-19 live evidence recorded two public addresses as `needs_review` without exposing the credential; rerun live checks for each release rather than treating that result as current. `vercel build --prod` has no valid expected result until `vercel pull` has obtained project settings from a linked Vercel project.
 
 ## Staged production release
 

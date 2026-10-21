@@ -1,5 +1,7 @@
 # Phase 4 GitHub and Vercel release report
 
+> **Historical snapshot:** This report records the pre-publication state on 2026-10-19. The repository and production deployment were published afterward; later release evidence supersedes its forward-looking status without changing this historical record.
+
 Run date: 2026-10-19
 
 Application version: `0.4.0`

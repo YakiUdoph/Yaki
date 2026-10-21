@@ -1,5 +1,5 @@
 {
-  "runAt": "2026-10-19T09:34:44.670Z",
+  "runAt": "2026-10-21T20:33:31.293Z",
   "browser": "Google Chrome headless via Playwright, fresh isolated context, extensions disabled",
   "provider": "explicit mock; no Geoapify quota consumed",
   "source": {
@@ -10,35 +10,39 @@
   "network": {
     "requests": [
       {
-        "url": "http://127.0.0.1:58595/",
+        "url": "http://127.0.0.1:49951/",
         "type": "document"
       },
       {
-        "url": "http://127.0.0.1:58595/styles.css",
+        "url": "http://127.0.0.1:49951/styles.css",
         "type": "stylesheet"
       },
       {
-        "url": "http://127.0.0.1:58595/app.js",
+        "url": "http://127.0.0.1:49951/app.js",
         "type": "script"
       },
       {
-        "url": "http://127.0.0.1:58595/countries.js",
+        "url": "http://127.0.0.1:49951/countries.js",
         "type": "script"
       },
       {
-        "url": "http://127.0.0.1:58595/csv.js",
+        "url": "http://127.0.0.1:49951/csv.js",
         "type": "script"
       },
       {
-        "url": "http://127.0.0.1:58595/export.js",
+        "url": "http://127.0.0.1:49951/export.js",
         "type": "script"
       },
       {
-        "url": "http://127.0.0.1:58595/review-model.js",
+        "url": "http://127.0.0.1:49951/api-client.js",
         "type": "script"
       },
       {
-        "url": "http://127.0.0.1:58595/favicon.svg",
+        "url": "http://127.0.0.1:49951/review-model.js",
+        "type": "script"
+      },
+      {
+        "url": "http://127.0.0.1:49951/favicon.svg",
         "type": "other"
       }
     ],
@@ -61,7 +65,7 @@
     "clipped": [],
     "contrastFailures": [],
     "scripts": [
-      "http://127.0.0.1:58595/app.js"
+      "http://127.0.0.1:49951/app.js"
     ],
     "iframes": [],
     "walletGlobalPresent": false,
@@ -104,7 +108,7 @@
     "clipped": [],
     "contrastFailures": [],
     "scripts": [
-      "http://127.0.0.1:58595/app.js"
+      "http://127.0.0.1:49951/app.js"
     ],
     "iframes": [],
     "walletGlobalPresent": false,

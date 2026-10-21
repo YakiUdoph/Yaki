@@ -4,7 +4,7 @@ Status: Phase 4 release candidate, version `0.4.0`.
 
 Yaki is built around one constraint: a geocoding match is useful location evidence, but it is not a delivery-ready verdict. The application preserves the provider's candidates and asks a person to make the final decision instead of turning rank or confidence into an automatic approval.
 
-The local path described below was exercised end to end. The Vercel path is implemented and covered by contract tests, but no public deployment URL had been created when this document was revised. Statements about deployed runtime behavior are therefore based on source and configuration unless a report explicitly labels them as live observations.
+The local path described below was exercised end to end. The Vercel path is deployed at `https://yaki-seven.vercel.app/`; release-specific runtime claims still require a dated live observation and must not be inferred from source or contract tests alone.
 
 ## Components
 
@@ -85,4 +85,4 @@ Vercel terminates TLS and runs the API as stateless Node.js Functions. `GEOAPIFY
 
 - **Observed:** local HTTP behavior, browser workflows, clean-profile network activity, provider calls using public addresses, and the recorded test artifacts.
 - **Verified from source and tests:** Vercel Function request validation, routing, headers, key handling, timeout behavior, and per-instance rate limiting.
-- **Not yet observed:** a public Vercel build and deployment, distributed rate-limit behavior under scale, production logs, or a real multi-user workload.
+- **Still unverified:** distributed rate-limit behavior under scale, production logs, or a real multi-user workload.

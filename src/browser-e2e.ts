@@ -31,11 +31,32 @@ async function findBrowser(): Promise<{ path: string; name: string }> {
 async function main(): Promise<void> {
   const browserBinary = await findBrowser();
   const app = createYakiServer({
-    check: async ({ address, countryCode }) => ({
-      status: "needs_review",
-      originalAddress: address,
-      countryCode,
-      candidates: [
+    check: async ({ address, countryCode }) => {
+      if (address === "Countryless candidate") {
+        return {
+          status: "needs_review",
+          originalAddress: address,
+          countryCode,
+          candidates: [{
+            formatted: "Country information unavailable",
+            place_id: "browser-test-country-missing",
+            confidence: 1,
+            match_type: "full_match",
+            result_type: "city",
+          }],
+          policy: {
+            version: "1.0.0",
+            status: "clarification_required",
+            readyForDispatch: false,
+            reasons: ["candidate_country_missing", "human_confirmation_required"],
+          },
+        };
+      }
+      return {
+        status: "needs_review",
+        originalAddress: address,
+        countryCode,
+        candidates: [
         {
           formatted: "Springfield, IL, United States of America",
           place_id: "browser-test-springfield-il",
@@ -56,14 +77,15 @@ async function main(): Promise<void> {
           match_type: "full_match",
           result_type: "city",
         },
-      ],
-      policy: {
-        version: "1.0.0",
-        status: "review_required",
-        readyForDispatch: false,
-        reasons: ["multiple_candidates", "human_confirmation_required"],
-      },
-    }),
+        ],
+        policy: {
+          version: "1.0.0",
+          status: "review_required",
+          readyForDispatch: false,
+          reasons: ["multiple_candidates", "human_confirmation_required"],
+        },
+      };
+    },
   });
   await new Promise<void>((resolve) => app.listen(0, "127.0.0.1", resolve));
   const appAddress = app.address() as AddressInfo;
@@ -109,6 +131,14 @@ async function main(): Promise<void> {
     assert.ok(readyDownloadPath, "The ready-address export did not create a download.");
     assert.match(await readFile(readyDownloadPath, "utf8"), /Springfield/u);
 
+    await page.locator(".candidate input[type=radio]").nth(1).check();
+    await page.waitForSelector(".status-needs_review");
+    assert.equal(await page.locator("#export-ready").isDisabled(), true, "Changing a candidate did not revoke ready export.");
+    assert.equal(await page.locator(".confirm-check input").isChecked(), false, "Changing a candidate retained confirmation.");
+    await page.locator(".confirm-check input").check();
+    await page.locator(".review-controls .button-primary").click();
+    await page.waitForSelector(".status-ready");
+
     await page.setViewportSize({ width: 390, height: 844 });
     const mobile = await page.evaluate(() => ({
       viewport: document.documentElement.clientWidth,
@@ -118,6 +148,18 @@ async function main(): Promise<void> {
     assert.equal(mobile.viewport, 390, "The mobile viewport was not 390 px wide.");
     assert.ok(mobile.scrollWidth <= 390, `Mobile page overflowed to ${mobile.scrollWidth}px.`);
     assert.equal(mobile.clearVisible, true, "The Clear session control was not visible on mobile.");
+
+    await page.locator("#clear-session-button").click();
+    await page.locator("#confirm-clear").click();
+    await page.waitForFunction(() => document.querySelectorAll(".record-card").length === 0);
+
+    await page.selectOption("#country-select", "us");
+    await page.fill("#single-address", "Countryless candidate");
+    await page.locator("#single-address-form").evaluate((form: HTMLFormElement) => form.requestSubmit());
+    await page.waitForSelector(".status-needs_review");
+    assert.match(await page.locator(".error-box").innerText(), /did not provide country information/u);
+    assert.equal(await page.locator(".review-controls").count(), 0, "Clarification-required response exposed confirmation controls.");
+    assert.equal(await page.locator("#export-ready").isDisabled(), true, "Clarification-required response enabled ready export.");
 
     await page.locator("#clear-session-button").click();
     await page.locator("#confirm-clear").click();
@@ -154,6 +196,8 @@ async function main(): Promise<void> {
         ambiguousCandidatesPreserved: "PASS",
         candidateSelection: "PASS",
         explicitHumanConfirmation: "PASS",
+        candidateChangeRevokesConfirmation: "PASS",
+        clarificationRequiredBlocksConfirmationAndReadyExport: "PASS",
         reviewHistory: "PASS",
         readyCsvExport: "PASS",
         csvUploadAndPreview: "PASS",

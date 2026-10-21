@@ -40,6 +40,7 @@ test("CSV export separates ready and unresolved records and neutralizes formulas
     status: "ready",
     candidates: [candidate],
     selectedPlaceId: "selected",
+    policy: { version: "1.0.0", status: "review_required", readyForDispatch: false, reasons: [] },
     history: [{ action: "Marked ready", timestamp: "2026-10-18T00:00:00.000Z" }],
   };
   const unresolved = { ...ready, status: "no_match", selectedPlaceId: undefined };
@@ -51,4 +52,24 @@ test("CSV export separates ready and unresolved records and neutralizes formulas
   assert.match(csv, /'\+SUM/u);
   assert.match(csv, /'@unsafe/u);
   assert.match(csv, /'=WEBSERVICE/u);
+});
+
+test("ready export excludes records blocked by the server clarification policy", () => {
+  const blocked = {
+    originalAddress: "Springfield",
+    workingAddress: "Springfield",
+    status: "ready",
+    candidates: [{ place_id: "one", formatted: "Springfield", country_code: "ca" }],
+    selectedPlaceId: "one",
+    policy: {
+      version: "1.0.0",
+      status: "clarification_required",
+      readyForDispatch: false,
+      reasons: ["candidate_country_mismatch"],
+    },
+    history: [],
+  };
+  const partition = partitionRecords([blocked]);
+  assert.equal(partition.approved.length, 0);
+  assert.equal(partition.unresolved.length, 1);
 });

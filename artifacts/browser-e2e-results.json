@@ -1,5 +1,5 @@
 {
-  "runAt": "2026-10-19T09:35:31.342Z",
+  "runAt": "2026-10-21T20:33:14.052Z",
   "browser": "Microsoft Edge headless via Playwright, fresh isolated context",
   "provider": "explicit mock; no Geoapify quota consumed",
   "scenarios": {
@@ -9,6 +9,8 @@
     "ambiguousCandidatesPreserved": "PASS",
     "candidateSelection": "PASS",
     "explicitHumanConfirmation": "PASS",
+    "candidateChangeRevokesConfirmation": "PASS",
+    "clarificationRequiredBlocksConfirmationAndReadyExport": "PASS",
     "reviewHistory": "PASS",
     "readyCsvExport": "PASS",
     "csvUploadAndPreview": "PASS",

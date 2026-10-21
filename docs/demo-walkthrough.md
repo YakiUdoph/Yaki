@@ -2,6 +2,8 @@
 
 This walkthrough starts from a clean checkout and uses public addresses. It demonstrates the distinction Yaki is designed around: Geoapify can return a strong location match, but only a person can decide that the selected candidate is ready for this delivery workflow.
 
+Yaki uses the [Geoapify location platform](https://www.geoapify.com/) for candidate lookup. The public application is available at [https://yaki-seven.vercel.app/](https://yaki-seven.vercel.app/).
+
 Provider data can change. Candidate text, order, and count below are examples from the recorded 2026-10-19 run, not fixed assertions for future runs.
 
 ## Prerequisites
@@ -106,14 +108,14 @@ Expected results from the recorded 2026-10-19 release-candidate run:
 
 The browser test uses an explicit mock and consumes no Geoapify quota. The live test writes sanitized evidence to `artifacts/app-live-e2e-results.json`.
 
-To check an actual deployment after one exists:
+To check the production deployment:
 
 ```powershell
-$env:YAKI_BASE_URL="https://your-project.vercel.app"
+$env:YAKI_BASE_URL="https://yaki-seven.vercel.app"
 npm.cmd run test:app-live
 ```
 
-Replace the placeholder with the exact deployment URL. No public Yaki deployment had been verified when this walkthrough was revised, so a deployed result must not be inferred from the local evidence.
+This command consumes Geoapify quota and writes sanitized evidence. Run it only with an authorized test key and treat each recorded result as evidence for that deployment and time, not as a permanent accuracy claim.
 
 ## Captured evidence
 

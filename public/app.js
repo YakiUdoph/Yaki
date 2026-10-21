@@ -12,6 +12,8 @@ import {
   createReviewRecord,
   editForRecheck,
   newSessionState,
+  policyAllowsConfirmation,
+  reviewBlockMessages,
   selectCandidate,
 } from "./review-model.js";
 
@@ -228,7 +230,7 @@ function createRecordCard(record, index) {
     });
     detail.append(candidates);
 
-    if (record.status !== REVIEW_STATUSES.ready) {
+    if (record.status !== REVIEW_STATUSES.ready && policyAllowsConfirmation(record)) {
       const controls = makeElement("div", "review-controls");
       const confirmation = makeElement("label", "confirm-check");
       const checkbox = document.createElement("input");
@@ -250,6 +252,14 @@ function createRecordCard(record, index) {
       });
       controls.append(confirmation, confirm);
       detail.append(controls);
+      appendRecheckForm(detail, record);
+    } else if (record.status !== REVIEW_STATUSES.ready) {
+      const clarification = makeElement("div", "error-box");
+      clarification.append(makeElement("strong", "", "Clarification required"));
+      const reasons = makeElement("ul", "validation-list");
+      reviewBlockMessages(record).forEach((message) => reasons.append(makeElement("li", "", message)));
+      clarification.append(reasons);
+      detail.append(clarification);
       appendRecheckForm(detail, record);
     } else {
       detail.append(makeElement("p", "message success", "Ready after explicit human confirmation. The original input and selected result remain in the export."));
