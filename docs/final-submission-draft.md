@@ -1,6 +1,6 @@
 # Geoapify Open Geospatial Program — Batch #2 final submission draft
 
-> **DRAFT — DO NOT SEND YET.** Verify the publication URL, final commit, deployment status, screenshot checklist, recipient address from the acceptance email, and official deadline before sending.
+> **DRAFT — DO NOT SEND YET.** Verify the final submission commit or tag, exact Vercel deployment/alias mapping, screenshot checklist, recipient address from the acceptance email, and official deadline before sending.
 
 Evidence labels used below:
 
@@ -34,7 +34,7 @@ The central case study is `Springfield`. In a saved country-restricted experimen
 - **Setup and run instructions:** https://github.com/YakiUdoph/Yaki#setup-and-run
 - **Demo URL:** https://yaki-seven.vercel.app/
 - **Reproducible walkthrough:** https://github.com/YakiUdoph/Yaki/blob/main/docs/demo-walkthrough.md
-- **Tutorial or walkthrough URL:** **PENDING PUBLICATION URL**. Repository source: https://github.com/YakiUdoph/Yaki/blob/main/docs/geoapify-batch2-tutorial.md
+- **Tutorial or walkthrough URL:** https://github.com/YakiUdoph/Yaki/blob/main/docs/geoapify-batch2-tutorial.md
 - **Prompts, agent instructions, skills, or AI workflow used:** The repository does not preserve authentic historical Codex prompt transcripts, so none are reconstructed as history. The tutorial documents the evidence-first AI-assisted workflow supported by repository outputs and includes a clearly labeled present-day reproducible example prompt. It also links the executable MCP harnesses and saved sanitized tool evidence.
 
 #### Quick setup
@@ -96,7 +96,8 @@ Provider results can change, so the demonstration should validate the workflow r
 - **License:** MIT
 - **Version:** `0.4.0`
 - **Current verified Phase 5A commit:** `1ec592963145e9c796735bee0b25b1d0fb2de7b6`
-- **Phase 5B documentation commit:** **PENDING**
+- **Phase 5B tutorial package commit:** `1805ce3ae9ca88ec7c3016419e9196e04d78d109`
+- **Final submission commit or tag:** **CONFIRM after the final metadata/screenshot review**
 
 ### 5. Notes
 
@@ -120,10 +121,10 @@ Provider results can change, so the demonstration should validate the workflow r
 
 | Organizer requirement | Status | Evidence | Remaining action |
 | --- | --- | --- | --- |
-| Public repository | **VERIFIED locally / public URL supplied** | Repository remote and README link; local `origin/main` tracks Phase 5A commit | Confirm public accessibility before sending |
+| Public repository | **VERIFIED** | GitHub returned Phase 5B commit `1805ce3` at the public repository head | Recheck after final submission commit |
 | Permissive open-source license | **VERIFIED** | [`LICENSE`](../LICENSE), MIT | None |
 | Runnable or reproducible result | **VERIFIED locally** | `package.json`, README, walkthrough, automated/browser tests | One clean-checkout reviewer run is recommended |
-| Hosted demo | **USER-REPORTED working** | https://yaki-seven.vercel.app/ and owner report | Independently verify current commit, health, geocode, and alias |
+| Hosted demo | **PARTIALLY VERIFIED** | Owner report; Vercel commit check returned `success`; public `/api/health` returned HTTP 200 with `runtime: vercel-function` | Vercel team access is required to verify READY and exact alias-to-deployment mapping; fresh production geocode remains incomplete |
 | README architecture/setup/configuration/run steps | **VERIFIED** | [`README.md`](../README.md) | Recheck rendered links after Phase 5B push |
 | Public tutorial explaining construction and Geoapify use | **DOCUMENT CREATED** | [`geoapify-batch2-tutorial.md`](geoapify-batch2-tutorial.md) | Publish or submit stable public URL |
 | Geoapify backlink in README and tutorial | **VERIFIED in source** | README Attribution; tutorial opening | Check rendered links |
@@ -139,8 +140,9 @@ Provider results can change, so the demonstration should validate the workflow r
 
 ## Pre-send checklist
 
-- [ ] Replace the pending tutorial URL with its stable public URL.
-- [ ] Fill in the Phase 5B documentation commit and optional release tag.
+- [x] Publish the tutorial at a stable public repository URL.
+- [x] Record the Phase 5B tutorial package commit.
+- [ ] Record the final submission commit or optional release tag after the last metadata/screenshot change.
 - [ ] Confirm the recipient and November 15, 2026 deadline from the acceptance email.
 - [ ] Verify repository visibility and every rendered Markdown link.
 - [ ] Verify the production alias serves the Phase 5B commit and `/api/health` is healthy.
