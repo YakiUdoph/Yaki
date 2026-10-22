@@ -1,6 +1,6 @@
 # Geoapify Open Geospatial Program — Batch #2 final submission draft
 
-> **DRAFT — DO NOT SEND YET.** Record the final documentation commit, confirm the recipient address from the acceptance email, review the complete message, and retain the honest UNKNOWN label for exact Vercel deployment/alias mapping unless that mapping is independently verified. The owner-provided acceptance email establishes the November 15, 2026 deadline.
+> **DRAFT — DO NOT SEND YET.** Confirm the recipient address from the acceptance email and review the complete message before sending. The owner-provided acceptance email establishes the November 15, 2026 deadline. Phase 5F deployment metadata is recorded below from independent GitHub and Vercel checks.
 
 Evidence labels used below:
 
@@ -102,7 +102,8 @@ Provider results can change, so the demonstration should validate the workflow r
 - **Phase 5B tutorial package commit:** `1805ce3ae9ca88ec7c3016419e9196e04d78d109`
 - **Phase 5B publication-status commit and Phase 5C audited baseline:** `c10f984ecabc530258cb839f09db9e4865e8e63f`
 - **Phase 5D published documentation/evidence commit:** `fb26e7a234fc79ee3e38bd0e84dd946641595809`
-- **Phase 5F release commit:** the immutable `main` commit containing this document; use [Git history](https://github.com/YakiUdoph/Yaki/commits/main/) for its exact SHA rather than storing a self-referential placeholder
+- **Phase 5F runtime/evidence release commit:** `075c1bdf59eee1e761593e5aef6e3bcfa51fdd9d`
+- **Phase 5F final documentation commit:** the immutable `main` commit containing this document; use [Git history](https://github.com/YakiUdoph/Yaki/commits/main/) rather than storing an impossible self-reference
 - **Release tag:** not created; optional and intentionally deferred
 
 ### 5. Notes
@@ -120,8 +121,8 @@ Provider results can change, so the demonstration should validate the workflow r
   - **VERIFIED production behavior on October 21, 2026:** an independent browser session made exactly one `POST /api/geocode` request for public input `Springfield` and country `US`. It received HTTP `200` with ten candidates and `review_required`, selected Springfield, Illinois, required explicit confirmation, and exported one Ready CSV row without a second geocoding request or browser console error. See the [sanitized production evidence](../artifacts/production-verification-2026-10-21/README.md).
   - This production session verifies one successful selection/confirmation/export flow. Clarification-required, candidate-change, no-result, and provider-error behavior remains verified by source and automated tests, not by this one production session.
   - **VERIFIED production behavior on October 22, 2026:** four additional browser sessions made exactly one request each for public landmarks in `NG`, `GB`, `GH`, and `CA`. All returned correct-country candidates and required explicit confirmation before one-row Ready export. These successful landmark cases do not establish general international accuracy or failure-path behavior. See the [published international evidence](../artifacts/international-production-verification-2026-10-22/README.md).
-  - **SOURCE/TEST-VERIFIED Phase 5F correction:** Ready and review messages now follow current state; candidate changes restore review copy; clarification-blocked records never show Ready copy. The correction was not re-tested against production because the phase prohibited additional Geoapify requests.
-  - **USER-REPORTED historical evidence:** the project owner previously reported that commit `1ec5929` was READY in Vercel Production. The exact current production alias-to-deployment-to-commit mapping remains **UNKNOWN** because authenticated Vercel inspection was unavailable during Phase 5C.
+  - **SOURCE/TEST-VERIFIED Phase 5F correction:** Ready and review messages now follow current state; candidate changes restore review copy; clarification-blocked records never show Ready copy. Vercel reported release commit `075c1bd` READY, and a public GET confirmed that the production alias served its corrected `review-model.js`. The phase prohibited another provider-backed interaction, so the corrected interaction was not re-run with Geoapify.
+  - **VERIFIED Phase 5F deployment mapping:** Vercel deployment `dpl_CgrAqLwemMQ3WcuRo8NBXK37wy9R` was `READY`, identified Git commit `075c1bdf59eee1e761593e5aef6e3bcfa51fdd9d`, and had `yaki-seven.vercel.app` assigned. The public home and `/api/health` returned HTTP 200. The earlier owner report about commit `1ec5929` remains **USER-REPORTED historical evidence**.
   - Production uses the direct Geoapify API. MCP is a documented development experiment, not a production LLM or per-address MCP dependency.
 
 ---
@@ -130,21 +131,21 @@ Provider results can change, so the demonstration should validate the workflow r
 
 | Organizer requirement | Status | Evidence | Remaining action |
 | --- | --- | --- | --- |
-| Public repository | **VERIFY AFTER PHASE 5F PUSH** | Phase 5D public baseline was `fb26e7a`; Phase 5F release is the commit containing this document | Confirm the pushed `main` SHA |
+| Public repository | **VERIFIED THROUGH PHASE 5F** | Public GitHub returned commit `075c1bd`, the tutorial, and the international evidence directory from `main` | Record the final documentation-only SHA in the release report |
 | Permissive open-source license | **VERIFIED** | [`LICENSE`](../LICENSE), MIT | None |
 | Runnable or reproducible result | **VERIFIED locally** | `package.json`, README, walkthrough, automated/browser tests | One clean-checkout reviewer run is recommended |
-| Hosted demo | **PUBLIC FLOW VERIFIED / MAPPING UNKNOWN** | Public home and `/api/health` returned HTTP 200; one-request production Springfield selection/confirmation/export evidence is tracked | Exact Vercel READY and alias-to-deployment-to-commit mapping requires authorized Vercel evidence |
-| README architecture/setup/configuration/run steps | **VERIFIED LOCALLY / RECHECK AFTER PUSH** | [`README.md`](../README.md) and successful relative-link checks | Confirm public rendering |
-| Public tutorial explaining construction and Geoapify use | **VERIFY AFTER PHASE 5F PUSH** | [Public tutorial](https://github.com/YakiUdoph/Yaki/blob/main/docs/geoapify-batch2-tutorial.md) | Confirm public rendering |
-| Geoapify backlink in README and tutorial | **VERIFIED LOCALLY / RECHECK AFTER PUSH** | README Attribution; tutorial opening; walkthrough opening | Confirm public rendering |
+| Hosted demo | **READY / MAPPING VERIFIED FOR `075c1bd`** | Vercel deployment `dpl_CgrAqLwemMQ3WcuRo8NBXK37wy9R` was READY, named commit `075c1bd`, and included the public alias; home and health returned HTTP 200 | Do not treat this as a provider-backed re-test of the corrected interaction |
+| README architecture/setup/configuration/run steps | **VERIFIED PUBLIC** | [`README.md`](../README.md), public GitHub, and successful relative-link checks | None |
+| Public tutorial explaining construction and Geoapify use | **VERIFIED PUBLIC** | [Public tutorial](https://github.com/YakiUdoph/Yaki/blob/main/docs/geoapify-batch2-tutorial.md) | None |
+| Geoapify backlink in README and tutorial | **VERIFIED PUBLIC** | README Attribution; tutorial opening; walkthrough opening | None |
 | AI prompts/instructions/workflow and lessons | **PARTIAL WITH DISCLOSED GAP** | Tutorial AI workflow and present-day example | Historical exact prompts are unavailable; do not claim otherwise |
 | Meaningful OpenAPI and/or MCP use | **VERIFIED** | `src/geoapify.ts`, capability docs, MCP harnesses, saved artifacts | None |
 | Concrete Geoapify tooling feedback | **VERIFIED in draft** | Tutorial and submission section 3 | Editorial review before sending |
 | Core flows tested | **VERIFIED with stated boundaries** | Automated and Vercel-contract suites; fresh mock browser/CSV checks; production Springfield plus four international public-landmark success paths | Do not generalize successful landmark sessions to every address or edge case |
 | Private keys hidden | **VERIFIED in tracked evidence** | `.gitignore`, `.env.example`, redaction tests/artifacts | Re-run secret scan before final send |
 | Architecture and known limitations | **VERIFIED** | README, architecture doc, tutorial, this draft | None |
-| Correct screenshots | **VERIFIED FOR FIVE PRODUCTION FLOWS** | [Springfield evidence](../artifacts/production-verification-2026-10-21/README.md) distinguishes browser screenshots from a rendered CSV image; [international evidence](../artifacts/international-production-verification-2026-10-22/README.md) contains only original browser screenshots and downloads | Recheck public image rendering after push |
-| Final release commit/tag | **COMMIT ON PUSH / TAG DEFERRED** | Phase 5F release is the immutable commit containing this document; no release tag | Record the exact pushed SHA in the release report |
+| Correct screenshots | **VERIFIED FOR FIVE PRODUCTION FLOWS** | [Springfield evidence](../artifacts/production-verification-2026-10-21/README.md) distinguishes browser screenshots from a rendered CSV image; [international evidence](../artifacts/international-production-verification-2026-10-22/README.md) contains only original browser screenshots and downloads | None |
+| Final release commit/tag | **DOCUMENTATION COMMIT ON PUSH / TAG DEFERRED** | Runtime/evidence release `075c1bd`; final documentation is the commit containing this file; no release tag | Record the exact final SHA in the release report |
 | Final submission recipient | **UNKNOWN / CONFIRM** | The repository intentionally does not store the acceptance-email address | Confirm from the acceptance email before sending |
 | Final submission deadline | **USER-REPORTED CONFIRMED** | Owner-provided acceptance email establishes November 15, 2026; email is not public repository evidence | No repository action required |
 
@@ -155,7 +156,7 @@ Provider results can change, so the demonstration should validate the workflow r
 - [x] Retain Phase 5D documentation/evidence commit `fb26e7a234fc79ee3e38bd0e84dd946641595809` as historical metadata; do not create a tag yet.
 - [ ] Confirm the recipient from the acceptance email. The owner-provided email already establishes the November 15, 2026 deadline.
 - [x] Recheck repository visibility and rendered Markdown/image links after the Phase 5D push.
-- [ ] Keep exact Vercel READY and alias-to-deployment-to-commit mapping **UNKNOWN** unless independently verified with authorized evidence.
+- [x] Record the independently verified Vercel READY and alias-to-deployment-to-commit mapping for `075c1bd` without extending it to untested provider behavior.
 - [x] Perform the smallest justified production check: exactly one public `Springfield`/`US` request, with the selection/confirmation/export outcome recorded.
 - [x] Preserve the clean Springfield selection/confirmation/Ready CSV evidence without credentials.
 - [x] Complete the applicable Phase 5F quota-free checks: TypeScript passed; 48 automated tests passed with one credential-gated live test skipped; focused review/CSV tests passed 15/15; Vercel contracts passed 4/4; mock browser and clean-profile visual/security checks passed.
