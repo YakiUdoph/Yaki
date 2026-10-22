@@ -39,6 +39,8 @@ A typical review starts with an address such as `200 Larkin Street, San Francisc
 - Node.js 22.18 or later
 - A Geoapify API key authorized for Geocoding API use
 
+**USER-REPORTED program context:** the organizer provided the deployed project with a Geoapify free-plan key. Its value is not stored in this repository or documentation; production receives it only through the sensitive server-side `GEOAPIFY_API_KEY` environment variable. Independent reviewers should use their own authorized key for local live checks.
+
 The application has no third-party runtime packages. `playwright-core` is a development-only dependency used by the browser verification scripts.
 
 ## Setup and run
@@ -131,17 +133,22 @@ npm.cmd run test:live-country
 npm.cmd run test:live
 ```
 
-Fresh quota-free outcomes (2026-10-21, Phase 5D documentation/evidence validation):
+Fresh quota-free outcomes (2026-10-22, Phase 5F release validation):
 
 - TypeScript check: **PASS**.
-- Automated suite: **46 passed, 0 failed, 1 credential-gated live test skipped** (47 discovered).
+- Automated suite: **48 passed, 0 failed, 1 credential-gated live test skipped** (49 discovered).
+- Focused review-model and CSV suite: **15 passed, 0 failed**.
 - Focused Vercel Function contracts: **4 passed, 0 failed**.
+- Mock browser E2E: **PASS**, including pre-confirmation, Ready, candidate-change, and clarification-blocked messaging.
+- Clean-profile visual, accessibility, and security audit: **PASS** at desktop and 390px widths.
 
-The most recent tracked mock browser E2E and clean-profile visual/security audits remain the Phase 5A **PASS** results for keyboard focus, country selection, ambiguous candidates, policy-blocked clarification, candidate-change re-confirmation, ready/unresolved export, 390px layout, clear session, and the documented security checks. Phase 5D did not rerun those scripts because they rewrite tracked evidence artifacts.
+All Phase 5F checks ran with `GEOAPIFY_API_KEY` absent. The browser provider was an explicit mock, so these checks consumed no Geoapify quota. They verify the local release source, not a production deployment.
 
 Historical live application evidence from 2026-10-19 remains **PASS** for two public addresses; candidates remained `needs_review`, with no automatic approval or credential exposure. That historical result is not evidence for the current production deployment.
 
 A separate production browser verification on 2026-10-21 used exactly one `Springfield`/`US` request. The live application returned ten candidates, kept the row under review, required selection and explicit human confirmation, and exported one Ready CSV row without making a second geocoding request. The sanitized [production evidence](artifacts/production-verification-2026-10-21/README.md) includes three application screenshots, the downloaded CSV, and a clearly identified separate rendering of that CSV. It verifies this one production workflow, not every policy edge case or the exact Vercel deployment-to-commit mapping.
+
+On 2026-10-22, a four-request international production check used the public landmarks National Theatre in Lagos (`NG`), Buckingham Palace in London (`GB`), Independence Square/Black Star Square in Accra (`GH`), and CN Tower in Toronto (`CA`). Each request returned HTTP `200`; every returned candidate carried the selected country code; every record remained `review_required` until explicit confirmation; and each selected landmark produced a one-row Ready CSV without another geocoding request. The preserved [international production evidence](artifacts/international-production-verification-2026-10-22/README.md) includes the original screenshots, CSVs, result JSON, and SHA-256 manifest. This verifies four successful landmark workflows, not general international accuracy or failure handling. The screenshots predate the Phase 5F copy correction and therefore do not prove that correction is deployed.
 
 Full evidence and honest failure history are in [docs/phase3-test-report.md](docs/phase3-test-report.md). Screenshots are under `artifacts/screenshots/`.
 
@@ -164,6 +171,7 @@ The application visibly includes `Powered by Geoapify` and `© OpenStreetMap con
 
 - [Batch #2 tutorial — Which Springfield?](docs/geoapify-batch2-tutorial.md)
 - [Production Springfield verification — 2026-10-21](artifacts/production-verification-2026-10-21/README.md)
+- [International production verification — 2026-10-22](artifacts/international-production-verification-2026-10-22/README.md)
 - [Architecture and data handling](docs/architecture.md)
 - [Demo walkthrough](docs/demo-walkthrough.md)
 - [Final submission draft](docs/final-submission-draft.md)

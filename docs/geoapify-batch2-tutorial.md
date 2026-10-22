@@ -67,6 +67,18 @@ The project owner initially reported exercising the production UI, selecting Spr
 
 On October 21, 2026, a separate Phase 5C verification captured a later session against the public Yaki application. The browser made exactly one `POST /api/geocode` request for `Springfield` with country `US`; production returned HTTP `200` and ten candidates. The server policy was `review_required`, `readyForDispatch` was `false`, and every displayed candidate had 100% match confidence. The UI still required candidate selection and explicit confirmation before enabling a one-row Ready export. No second geocoding request or browser console error was observed.
 
+![Production Yaki session showing ten Springfield candidates before selection. The row remains Needs review and Ready export is unavailable.](../artifacts/production-verification-2026-10-21/01-springfield-candidates.png)
+
+*Figure 2 — VERIFIED production browser capture before selection. Ten candidates are visible, but none is automatically approved.*
+
+![Production Yaki session with Springfield, Illinois selected while explicit confirmation is still unchecked.](../artifacts/production-verification-2026-10-21/02-candidate-selected-awaiting-confirmation.png)
+
+*Figure 3 — VERIFIED production browser capture after selection and before human confirmation. Ready export remains unavailable.*
+
+![Production Yaki session showing Springfield, Illinois Ready only after explicit confirmation.](../artifacts/production-verification-2026-10-21/03-ready-after-confirmation.png)
+
+*Figure 4 — VERIFIED production browser capture after confirmation. Ready export is enabled.*
+
 The sanitized [production evidence directory](../artifacts/production-verification-2026-10-21/README.md) contains:
 
 1. a production browser screenshot of all candidates before selection;
@@ -76,6 +88,23 @@ The sanitized [production evidence directory](../artifacts/production-verificati
 5. a separately identified local rendering of that CSV, which is not presented as a production-page screenshot.
 
 The earlier saved direct/MCP experiment returned five candidates, while this later production response returned ten. That difference is expected provider variability and is why no future candidate count should be treated as permanent. This production session verifies one successful review/export path; clarification, candidate-change, no-result, and provider-error safeguards remain source/test-verified rather than production-verified by this session.
+
+### International production acceptance check
+
+On October 22, 2026, Phase 5E made four additional production requests—exactly one per selected country, with no retry. All four public landmarks completed the selection, explicit-confirmation, and Ready-export flow without a second geocoding request:
+
+| Country and public query | HTTP | Candidates | Country-policy observation | Selected result | Outcome |
+| --- | ---: | ---: | --- | --- | --- |
+| Nigeria (`NG`): `National Theatre, Lagos` | 200 | 10 | All 10 carried `ng`; `review_required` | National Theatre, Lagos Badagry Expressway | **PASS** |
+| United Kingdom (`GB`): `Buckingham Palace, London` | 200 | 10 | All 10 carried `gb`; `review_required` | Buckingham Palace, London, SW1A 1AA | **PASS** |
+| Ghana (`GH`): `Independence Square, Accra` | 200 | 1 | Candidate carried `gh`; `review_required` | Black Star Square, Accra | **PASS** |
+| Canada (`CA`): `CN Tower, Toronto` | 200 | 1 | Candidate carried `ca`; `review_required` | CN Tower, Toronto | **PASS** |
+
+In every case, `readyForDispatch` was initially `false`, `human_confirmation_required` was present, Ready export stayed disabled before selection and confirmation, and the downloaded Ready CSV contained exactly one row with the selected country code. No browser console error was observed. The original screenshots, downloaded CSVs, machine-readable result, scope notes, and SHA-256 manifest are published in the [international production evidence directory](../artifacts/international-production-verification-2026-10-22/README.md).
+
+The preserved Ready screenshots also expose a real presentation defect in that production session: the earlier blue completion banner still said “Review is still required” after the row became Ready. In the one-candidate Ghana and Canada cases, the card also retained “It still needs your confirmation.” Phase 5F corrected both strings to derive from the current record and existing server-policy state. Quota-free unit and mocked-browser regression tests verify the correction, candidate-change reset, and clarification block. Because no additional Geoapify request was permitted, the published pre-fix screenshots do not prove that the corrected copy is live in production.
+
+This is evidence for four successful public-landmark workflows at one point in time. It does not establish general international coverage, postal deliverability, future rankings, or production behavior for clarification, no-result, and provider-error cases.
 
 ## What Yaki does
 
@@ -90,7 +119,7 @@ The Ready and Unresolved exports are separate. Both preserve the original addres
 
 ![Yaki address workspace with country selection, single-address entry, CSV upload, queue filters, and separate export controls.](../artifacts/screenshots/yaki-workspace.png)
 
-*Figure 2 — VERIFIED empty-workspace capture. It documents the interface, not a live geocoding outcome.*
+*Figure 5 — VERIFIED empty-workspace capture. It documents the interface, not a live geocoding outcome.*
 
 ## Architecture: direct API in production, MCP in the experiment
 
@@ -277,7 +306,15 @@ Commit `ed4fd39` replaced a default object with named `POST`, `GET`, and `HEAD` 
 
 **Lesson:** safety decisions returned by the server must survive every client-side transition and every export boundary.
 
-### 4. A credentialed live check later failed at the network boundary
+### 4. Ready-state informational copy went stale
+
+**Confirmed root cause:** the completion banner was written only when the geocoding batch ended, while the candidate-card introduction depended only on candidate count. Neither message derived from the later confirmation state.
+
+**Confirmed correction:** Phase 5F now derives both messages from the existing browser review record and policy contract. Before confirmation they ask for review; after eligible confirmation they describe Ready; changing the candidate restores review copy; and `clarification_required` can never produce Ready copy.
+
+**Lesson:** informational text is part of the state model. A correct badge and export gate do not excuse contradictory guidance elsewhere on the same screen.
+
+### 5. A credentialed live check later failed at the network boundary
 
 **USER-REPORTED historical observation:** during Phase 5A on October 21, the one-address credentialed test was attempted twice and returned Yaki's safe `502` network classification both times. No successful response was claimed, and the quota-free checks remained green. No standalone repository artifact preserves those two attempts.
 
@@ -287,7 +324,7 @@ Commit `ed4fd39` replaced a default object with named `POST`, `GET`, and `HEAD` 
 
 **Lesson:** retain typed network failure, never reinterpret it as “address invalid,” and never use unit-test success as deployment evidence.
 
-### 5. Browser evidence exposed unrelated extension content
+### 6. Browser evidence exposed unrelated extension content
 
 A prior screenshot contained a Gata browser-extension panel. A clean-profile audit found no matching source, iframe, wallet global, external request, or post-footer element in Yaki; the installed extension bundle contained the distinctive text and had all-URL scripting scope.
 
@@ -300,6 +337,8 @@ Requirements:
 - Node.js 22.18 or later;
 - PowerShell for the commands below;
 - a Geoapify key authorized for Geocoding API use only when running live checks.
+
+**USER-REPORTED program context:** the organizer supplied a Geoapify free-plan key for the deployed project. The value is intentionally absent from this repository and article. Vercel provides it only as the sensitive server-side `GEOAPIFY_API_KEY`; readers must use their own authorized key for local live checks.
 
 ```powershell
 git clone https://github.com/YakiUdoph/Yaki.git
@@ -404,7 +443,7 @@ Constructive tooling feedback:
 5. Provide a documented MCP batch-address tool or a direct guide explaining when agents should choose Generic Batch versus paced direct calls.
 6. Add more executable examples that demonstrate HTTP 200 plus `result.isError: true` so client authors do not mistake it for success.
 
-Potential Yaki improvements include a distributed rate limiter, authentication and role separation, durable but privacy-reviewed audit history, resumable large imports, accessibility testing with assistive technology, and a clean screenshot set for the real Springfield workflow. None of those are claimed as current functionality.
+Potential Yaki improvements include a distributed rate limiter, authentication and role separation, durable but privacy-reviewed audit history, resumable large imports, and accessibility testing with assistive technology. None of those are claimed as current functionality.
 
 ## Final lesson
 

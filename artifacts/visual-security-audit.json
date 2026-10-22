@@ -1,5 +1,5 @@
 {
-  "runAt": "2026-10-21T22:37:29.206Z",
+  "runAt": "2026-10-22T10:10:47.514Z",
   "browser": "Google Chrome headless via Playwright, fresh isolated context, extensions disabled",
   "provider": "explicit mock; no Geoapify quota consumed",
   "source": {
@@ -10,39 +10,39 @@
   "network": {
     "requests": [
       {
-        "url": "http://127.0.0.1:57732/",
+        "url": "http://127.0.0.1:62889/",
         "type": "document"
       },
       {
-        "url": "http://127.0.0.1:57732/styles.css",
+        "url": "http://127.0.0.1:62889/styles.css",
         "type": "stylesheet"
       },
       {
-        "url": "http://127.0.0.1:57732/app.js",
+        "url": "http://127.0.0.1:62889/app.js",
         "type": "script"
       },
       {
-        "url": "http://127.0.0.1:57732/countries.js",
+        "url": "http://127.0.0.1:62889/countries.js",
         "type": "script"
       },
       {
-        "url": "http://127.0.0.1:57732/csv.js",
+        "url": "http://127.0.0.1:62889/csv.js",
         "type": "script"
       },
       {
-        "url": "http://127.0.0.1:57732/export.js",
+        "url": "http://127.0.0.1:62889/export.js",
         "type": "script"
       },
       {
-        "url": "http://127.0.0.1:57732/api-client.js",
+        "url": "http://127.0.0.1:62889/api-client.js",
         "type": "script"
       },
       {
-        "url": "http://127.0.0.1:57732/review-model.js",
+        "url": "http://127.0.0.1:62889/review-model.js",
         "type": "script"
       },
       {
-        "url": "http://127.0.0.1:57732/favicon.svg",
+        "url": "http://127.0.0.1:62889/favicon.svg",
         "type": "other"
       }
     ],
@@ -65,7 +65,7 @@
     "clipped": [],
     "contrastFailures": [],
     "scripts": [
-      "http://127.0.0.1:57732/app.js"
+      "http://127.0.0.1:62889/app.js"
     ],
     "iframes": [],
     "walletGlobalPresent": false,
@@ -108,7 +108,7 @@
     "clipped": [],
     "contrastFailures": [],
     "scripts": [
-      "http://127.0.0.1:57732/app.js"
+      "http://127.0.0.1:62889/app.js"
     ],
     "iframes": [],
     "walletGlobalPresent": false,

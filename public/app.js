@@ -8,12 +8,14 @@ import {
   applyCheckResult,
   beginCheck,
   clearSession,
+  candidateReviewMessage,
   confirmReady,
   createReviewRecord,
   editForRecheck,
   newSessionState,
   policyAllowsConfirmation,
   reviewBlockMessages,
+  reviewProgressMessage,
   selectCandidate,
 } from "./review-model.js";
 
@@ -220,10 +222,7 @@ function createRecordCard(record, index) {
     }
     appendRecheckForm(detail, record);
   } else {
-    const intro = record.candidates.length > 1
-      ? `${record.candidates.length} candidates were returned. Choose only after comparing them.`
-      : "One candidate was returned. It still needs your confirmation.";
-    detail.append(makeElement("p", "record-note", intro));
+    detail.append(makeElement("p", "record-note", candidateReviewMessage(record)));
     const candidates = makeElement("div", "candidate-list");
     record.candidates.forEach((candidate, candidateIndex) => {
       candidates.append(createCandidate(record, candidate, candidateIndex));
@@ -287,6 +286,9 @@ function renderCounts() {
 
 function renderQueue() {
   renderCounts();
+  if (!state.checking && state.records.length > 0) {
+    elements.progress.textContent = reviewProgressMessage(state.records);
+  }
   elements.country.disabled = state.records.length > 0;
   const visible = state.records.filter((record) => {
     if (activeFilter === "all") return true;
@@ -353,7 +355,7 @@ async function runBatch(ids) {
     await runCheck(ids[index]);
   }
   state.checking = false;
-  elements.progress.textContent = `Finished checking ${ids.length} ${ids.length === 1 ? "address" : "addresses"}. Review is still required.`;
+  elements.progress.textContent = reviewProgressMessage(state.records);
   window.setTimeout(() => { elements.progress.hidden = true; }, 4500);
 }
 

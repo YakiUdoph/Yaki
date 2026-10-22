@@ -1,0 +1,434 @@
+{
+  "runAt": "2026-10-22T09:55:55.966Z",
+  "productionUrl": "https://yaki-seven.vercel.app/",
+  "browser": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+  "requestLimit": 4,
+  "apiRequestCount": 4,
+  "cases": [
+    {
+      "country": "Nigeria",
+      "countryCode": "ng",
+      "address": "National Theatre, Lagos",
+      "requests": 1,
+      "consoleErrors": [],
+      "screenshots": {
+        "candidates": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\01-ng-candidates.png",
+        "selected": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\01-ng-selected.png",
+        "ready": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\01-ng-ready.png"
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://yaki-seven.vercel.app/api/geocode",
+        "postData": {
+          "address": "National Theatre, Lagos",
+          "countryCode": "ng"
+        }
+      },
+      "httpStatus": 200,
+      "response": {
+        "status": "needs_review",
+        "countryCode": "ng",
+        "candidateCount": 10,
+        "policyStatus": "review_required",
+        "readyForDispatch": false,
+        "policyReasons": [
+          "multiple_candidates",
+          "human_confirmation_required"
+        ]
+      },
+      "candidates": [
+        {
+          "placeId": "51d185a28a2cf30a40594206f2ecf2e51940f00103f901fd7dd77601000000c002019203104e6174696f6e616c2054686561747265",
+          "formatted": "National Theatre, Lagos Badagry Expressway, Lagos 101212, LA, Nigeria",
+          "countryCode": "ng",
+          "confidence": 0.6666666666666667,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "51a7751bd47eeb0a405985ce6bec12fd1940f00102f901a5d1da0c00000000c002019203164c61676f73204e6174696f6e616c205374616469756de203216f70656e7374726565746d61703a76656e75653a7761792f323135363637313039",
+          "formatted": "Lagos National Stadium, National Stadium Complex, Alagbede 102215, LA, Nigeria",
+          "countryCode": "ng",
+          "confidence": 0,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "51d272a087da460b4059f5da6cacc4bc1940f00102f9015682432300000000c002019203234e6174696f6e616c204f70656e20556e6976657273697479206f66204e696765726961",
+          "formatted": "National Open University of Nigeria, 14/16 Ahmadu Bello Way, Ikoyi 101241, LA, Nigeria",
+          "countryCode": "ng",
+          "confidence": 0,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "514e7e8b4e963a0b4059a53b3e100fc71940f00102f901ffc50d2800000000c0020192030f4e6174696f6e616c204d757365756d",
+          "formatted": "National Museum, Awolowo Road, Lagos 100242, LA, Nigeria",
+          "countryCode": "ng",
+          "confidence": 0,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "516490bb0853f40a40598a16eafa4fe81940f00103f901083b9b7601000000c0020192031f4e6174696f6e616c2047616c6c657279206f66204d6f6465726e2041727473e203236f70656e7374726565746d61703a76656e75653a6e6f64652f36323834383531393736",
+          "formatted": "National Gallery of Modern Arts, Eko Bridge, Lagos 101212, LA, Nigeria",
+          "countryCode": "ng",
+          "confidence": 0,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "51131fe91db8f40a4059a6327b8fe9e71940f00102f901bfeaf70c00000000c002019203154e6174696f6e616c20417274732054686561747265e203216f70656e7374726565746d61703a76656e75653a7761792f323137353734303739",
+          "formatted": "National Arts Theatre, Eko Bridge, Lagos 101212, LA, Nigeria",
+          "countryCode": "ng",
+          "confidence": 0,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "51a435069d103a0b4059e8bd310400c71940f00102f901ffc50d2800000000c00201e203216f70656e7374726565746d61703a76656e75653a7761792f363731393931323935",
+          "formatted": "National Museum, Lagos 100242, LA, Nigeria",
+          "countryCode": "ng",
+          "confidence": 0,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "51a88fc01f7e1e0b40598a1f63ee5a121a40f00102f9015825272a00000000c00201e203216f70656e7374726565746d61703a76656e75653a7761792f373037323038353336",
+          "formatted": "Amphi Theatre, Lagos 104233, LA, Nigeria",
+          "countryCode": "ng",
+          "confidence": 0,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "51008860c1a2f70a4059f5a276bf0a201a40f00102f9011c864b1f00000000c002019203244e6174696f6e616c204f7274686f70616564696320486f73706974616c204967626f6269",
+          "formatted": "National Orthopaedic Hospital Igbobi, George Street, Ikeja 102216, LA, Nigeria",
+          "countryCode": "ng",
+          "confidence": 0,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "512eca6c9049460b40593f00a94d9cbc1940f00102f9015682432300000000c002019203234e6174696f6e616c204f70656e20556e6976657273697479206f66204e696765726961e203216f70656e7374726565746d61703a76656e75653a7761792f353931363236383338",
+          "formatted": "National Open University of Nigeria, 14/16 Ahmadu Bello Way, Lagos 101241, LA, Nigeria",
+          "countryCode": "ng",
+          "confidence": 0,
+          "matchType": "full_match"
+        }
+      ],
+      "countryPolicy": {
+        "everyCandidateMatchesSelectedCountry": true,
+        "missingCountryCount": 0,
+        "mismatchedCountryCount": 0
+      },
+      "uiRecordClass": "record-card",
+      "uiCandidateCount": 10,
+      "explicitApproval": {
+        "policyRequiresHumanConfirmation": true,
+        "confirmationControlsVisible": true,
+        "readyBeforeSelection": false,
+        "readyExportDisabledBeforeSelection": true
+      },
+      "suitableCandidateFound": true,
+      "selectedCandidate": "National Theatre, Lagos Badagry Expressway, Lagos 101212, LA, Nigeria",
+      "afterSelection": {
+        "ready": false,
+        "confirmationChecked": false,
+        "readyExportDisabled": true
+      },
+      "afterConfirmation": {
+        "ready": true,
+        "readyExportDisabled": false,
+        "readyMessagePresent": true
+      },
+      "export": {
+        "filename": "yaki-ready-addresses.csv",
+        "path": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\01-ng-ready.csv",
+        "rowCountExcludingHeader": 1,
+        "containsOriginalAddress": true,
+        "containsSelectedCandidate": true,
+        "containsCountryCode": true
+      },
+      "result": "PASS"
+    },
+    {
+      "country": "United Kingdom",
+      "countryCode": "gb",
+      "address": "Buckingham Palace, London",
+      "requests": 1,
+      "consoleErrors": [],
+      "screenshots": {
+        "candidates": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\02-gb-candidates.png",
+        "selected": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\02-gb-selected.png",
+        "ready": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\02-gb-ready.png"
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://yaki-seven.vercel.app/api/geocode",
+        "postData": {
+          "address": "Buckingham Palace, London",
+          "countryCode": "gb"
+        }
+      },
+      "httpStatus": 200,
+      "response": {
+        "status": "needs_review",
+        "countryCode": "gb",
+        "candidateCount": 10,
+        "policyStatus": "review_required",
+        "readyForDispatch": false,
+        "policyReasons": [
+          "multiple_candidates",
+          "human_confirmation_required"
+        ]
+      },
+      "candidates": [
+        {
+          "placeId": "519622f94a2025c2bf59b43ee5982cc04940f00101f90154794f0000000000c002019203114275636b696e6768616d2050616c616365e203246f70656e7374726565746d61703a76656e75653a72656c6174696f6e2f35323038343034",
+          "formatted": "Buckingham Palace, London, SW1A 1AA, United Kingdom",
+          "countryCode": "gb",
+          "confidence": 1,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "51a0c03bf9f4d8b63f590a6af816d6c74940f00102f9013a300e0100000000c00201e203206f70656e7374726565746d61703a76656e75653a7761792f3137373037303636",
+          "formatted": "Buckingham Road Cemetery, London, IG1 1FT, United Kingdom",
+          "countryCode": "gb",
+          "confidence": 1,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "519ec838ebf8d4c1bf59e3c5c21039c04940f00103f901629793cc01000000c002019203114275636b696e6768616d2050616c616365e203236f70656e7374726565746d61703a76656e75653a6e6f64652f37373237313931393036",
+          "formatted": "Buckingham Palace, The Mall, London, SW1A 1BB, United Kingdom",
+          "countryCode": "gb",
+          "confidence": 1,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "51f12dac1bef8ec2bf59d064ff3c0dc04940f00101f901aa03f50000000000c002019203184275636b696e6768616d2050616c6163652047617264656ee203256f70656e7374726565746d61703a76656e75653a72656c6174696f6e2f3136303537323538",
+          "formatted": "Buckingham Palace Garden, Buckingham Palace, London, ENG, United Kingdom",
+          "countryCode": "gb",
+          "confidence": 0.9,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "516325e659492bc3bf5986713788d6be4940f00103f901ac28b83501000000c002019203164275636b696e6768616d2050616c61636520526f6164e203236f70656e7374726565746d61703a76656e75653a6e6f64652f35313936323238373830",
+          "formatted": "Buckingham Palace Road, London, SW1W 8PX, United Kingdom",
+          "countryCode": "gb",
+          "confidence": 0.9,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "519d8026c286a7bfbf59f415a4198bc24940c0020192030a4275636b696e6768616de2031667656f6e616d65733a76656e75653a36343636373937",
+          "formatted": "Buckingham, Bloomsbury, London, ENG, United Kingdom",
+          "countryCode": "gb",
+          "confidence": 0.5,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "516b2c616d8c9dc2bf594240be840ac04940c002059203114275636b696e6768616d2050616c616365e2032477686f736f6e66697273743a6e65696768626f7572686f6f643a31313538383539303431",
+          "formatted": "Buckingham Palace, London, ENG, United Kingdom",
+          "countryCode": "gb",
+          "confidence": 0.25,
+          "matchType": "match_by_city_or_disrict"
+        },
+        {
+          "placeId": "51812557b1f84dc2bf590419a65b1bc04940f00101f90154794f0000000000c002019203114275636b696e6768616d2050616c616365",
+          "formatted": "Buckingham Palace, Buckingham Gate, London, SW1A 1AA, United Kingdom",
+          "countryCode": "gb",
+          "confidence": 0,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "514641f0f8f6aec2bf5996b4e21b0ac04940f00101f901aa03f50000000000c002019203184275636b696e6768616d2050616c6163652047617264656e",
+          "formatted": "Buckingham Palace Garden, Victoria, London, ENG, United Kingdom",
+          "countryCode": "gb",
+          "confidence": 0,
+          "matchType": "full_match"
+        },
+        {
+          "placeId": "51ca9530896995c1bf59aeb6627fd9bf4940f00103f901ce3c9fb300000000c0020192030f4275636b696e6768616d2047617465e203236f70656e7374726565746d61703a76656e75653a6e6f64652f33303133353537343534",
+          "formatted": "Buckingham Gate, London, SW1E 6AE, United Kingdom",
+          "countryCode": "gb",
+          "confidence": 0,
+          "matchType": "full_match"
+        }
+      ],
+      "countryPolicy": {
+        "everyCandidateMatchesSelectedCountry": true,
+        "missingCountryCount": 0,
+        "mismatchedCountryCount": 0
+      },
+      "uiRecordClass": "record-card",
+      "uiCandidateCount": 10,
+      "explicitApproval": {
+        "policyRequiresHumanConfirmation": true,
+        "confirmationControlsVisible": true,
+        "readyBeforeSelection": false,
+        "readyExportDisabledBeforeSelection": true
+      },
+      "suitableCandidateFound": true,
+      "selectedCandidate": "Buckingham Palace, London, SW1A 1AA, United Kingdom",
+      "afterSelection": {
+        "ready": false,
+        "confirmationChecked": false,
+        "readyExportDisabled": true
+      },
+      "afterConfirmation": {
+        "ready": true,
+        "readyExportDisabled": false,
+        "readyMessagePresent": true
+      },
+      "export": {
+        "filename": "yaki-ready-addresses.csv",
+        "path": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\02-gb-ready.csv",
+        "rowCountExcludingHeader": 1,
+        "containsOriginalAddress": true,
+        "containsSelectedCandidate": true,
+        "containsCountryCode": true
+      },
+      "result": "PASS"
+    },
+    {
+      "country": "Ghana",
+      "countryCode": "gh",
+      "address": "Independence Square, Accra",
+      "requests": 1,
+      "consoleErrors": [],
+      "screenshots": {
+        "candidates": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\03-gh-candidates.png",
+        "selected": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\03-gh-selected.png",
+        "ready": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\03-gh-ready.png"
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://yaki-seven.vercel.app/api/geocode",
+        "postData": {
+          "address": "Independence Square, Accra",
+          "countryCode": "gh"
+        }
+      },
+      "httpStatus": 200,
+      "response": {
+        "status": "needs_review",
+        "countryCode": "gh",
+        "candidateCount": 1,
+        "policyStatus": "review_required",
+        "readyForDispatch": false,
+        "policyReasons": [
+          "human_confirmation_required"
+        ]
+      },
+      "candidates": [
+        {
+          "placeId": "510db1b096f1a5c8bf59ab15b71b8e301640f00102f90163ecaf0000000000c00201920311426c61636b205374617220537175617265",
+          "formatted": "Black Star Square, Ridge, Accra, Korle-Klottey Municipal District, Ghana",
+          "countryCode": "gh",
+          "confidence": 1,
+          "matchType": "inner_part"
+        }
+      ],
+      "countryPolicy": {
+        "everyCandidateMatchesSelectedCountry": true,
+        "missingCountryCount": 0,
+        "mismatchedCountryCount": 0
+      },
+      "uiRecordClass": "record-card",
+      "uiCandidateCount": 1,
+      "explicitApproval": {
+        "policyRequiresHumanConfirmation": true,
+        "confirmationControlsVisible": true,
+        "readyBeforeSelection": false,
+        "readyExportDisabledBeforeSelection": true
+      },
+      "suitableCandidateFound": true,
+      "selectedCandidate": "Black Star Square, Ridge, Accra, Korle-Klottey Municipal District, Ghana",
+      "afterSelection": {
+        "ready": false,
+        "confirmationChecked": false,
+        "readyExportDisabled": true
+      },
+      "afterConfirmation": {
+        "ready": true,
+        "readyExportDisabled": false,
+        "readyMessagePresent": true
+      },
+      "export": {
+        "filename": "yaki-ready-addresses.csv",
+        "path": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\03-gh-ready.csv",
+        "rowCountExcludingHeader": 1,
+        "containsOriginalAddress": true,
+        "containsSelectedCandidate": true,
+        "containsCountryCode": true
+      },
+      "result": "PASS"
+    },
+    {
+      "country": "Canada",
+      "countryCode": "ca",
+      "address": "CN Tower, Toronto",
+      "requests": 1,
+      "consoleErrors": [],
+      "screenshots": {
+        "candidates": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\04-ca-candidates.png",
+        "selected": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\04-ca-selected.png",
+        "ready": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\04-ca-ready.png"
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://yaki-seven.vercel.app/api/geocode",
+        "postData": {
+          "address": "CN Tower, Toronto",
+          "countryCode": "ca"
+        }
+      },
+      "httpStatus": 200,
+      "response": {
+        "status": "needs_review",
+        "countryCode": "ca",
+        "candidateCount": 1,
+        "policyStatus": "review_required",
+        "readyForDispatch": false,
+        "policyReasons": [
+          "human_confirmation_required"
+        ]
+      },
+      "candidates": [
+        {
+          "placeId": "51d02c6409c6d853c059628cfe863fd24540f00102f901969af30100000000c00201920308434e20546f776572",
+          "formatted": "CN Tower, 290 Bremner Boulevard, Toronto, ON M5V 3L9, Canada",
+          "countryCode": "ca",
+          "confidence": 1,
+          "matchType": "full_match"
+        }
+      ],
+      "countryPolicy": {
+        "everyCandidateMatchesSelectedCountry": true,
+        "missingCountryCount": 0,
+        "mismatchedCountryCount": 0
+      },
+      "uiRecordClass": "record-card",
+      "uiCandidateCount": 1,
+      "explicitApproval": {
+        "policyRequiresHumanConfirmation": true,
+        "confirmationControlsVisible": true,
+        "readyBeforeSelection": false,
+        "readyExportDisabledBeforeSelection": true
+      },
+      "suitableCandidateFound": true,
+      "selectedCandidate": "CN Tower, 290 Bremner Boulevard, Toronto, ON M5V 3L9, Canada",
+      "afterSelection": {
+        "ready": false,
+        "confirmationChecked": false,
+        "readyExportDisabled": true
+      },
+      "afterConfirmation": {
+        "ready": true,
+        "readyExportDisabled": false,
+        "readyMessagePresent": true
+      },
+      "export": {
+        "filename": "yaki-ready-addresses.csv",
+        "path": "C:\\Users\\PC\\AppData\\Local\\Temp\\YakiPhase5E-0096bc92a742404ba2f18b8962c47afa\\04-ca-ready.csv",
+        "rowCountExcludingHeader": 1,
+        "containsOriginalAddress": true,
+        "containsSelectedCandidate": true,
+        "containsCountryCode": true
+      },
+      "result": "PASS"
+    }
+  ],
+  "requestLimitRespected": true
+}

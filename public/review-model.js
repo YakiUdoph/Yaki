@@ -39,6 +39,35 @@ export function isReadyForExport(record) {
   return record.status === REVIEW_STATUSES.ready && policyAllowsConfirmation(record);
 }
 
+export function candidateReviewMessage(record) {
+  const count = record.candidates.length;
+  if (isReadyForExport(record)) {
+    return count === 1
+      ? "One candidate was returned and is Ready after your explicit confirmation."
+      : `${count} candidates were returned. Your selected candidate is Ready after explicit confirmation.`;
+  }
+  if (!policyAllowsConfirmation(record)) {
+    return count === 1
+      ? "One candidate was returned, but this address needs clarification before it can be ready."
+      : `${count} candidates were returned, but this address needs clarification before it can be ready.`;
+  }
+  return count === 1
+    ? "One candidate was returned. It still needs your confirmation."
+    : `${count} candidates were returned. Choose only after comparing them.`;
+}
+
+export function reviewProgressMessage(records) {
+  const count = records.length;
+  const checkedLabel = `${count} ${count === 1 ? "address" : "addresses"}`;
+  const readyCount = records.filter(isReadyForExport).length;
+  if (count > 0 && readyCount === count) {
+    return `Finished checking ${checkedLabel}. ${count === 1 ? "It is" : "All are"} Ready after explicit human confirmation.`;
+  }
+  const remaining = count - readyCount;
+  const remainingLabel = remaining === 1 ? "1 address" : `${remaining} addresses`;
+  return `Finished checking ${checkedLabel}. Review is still required for ${remainingLabel}.`;
+}
+
 function event(action, timestamp, selectedResult) {
   return {
     action,

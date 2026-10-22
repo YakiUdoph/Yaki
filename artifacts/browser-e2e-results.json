@@ -1,5 +1,5 @@
 {
-  "runAt": "2026-10-21T22:37:19.550Z",
+  "runAt": "2026-10-22T10:14:04.129Z",
   "browser": "Microsoft Edge headless via Playwright, fresh isolated context",
   "provider": "explicit mock; no Geoapify quota consumed",
   "scenarios": {
@@ -9,8 +9,12 @@
     "ambiguousCandidatesPreserved": "PASS",
     "candidateSelection": "PASS",
     "explicitHumanConfirmation": "PASS",
+    "readyStateMessaging": "PASS",
+    "singleCandidateReadyMessaging": "PASS",
     "candidateChangeRevokesConfirmation": "PASS",
+    "candidateChangeRestoresReviewMessaging": "PASS",
     "clarificationRequiredBlocksConfirmationAndReadyExport": "PASS",
+    "clarificationRequiredNeverShowsReadyMessaging": "PASS",
     "reviewHistory": "PASS",
     "readyCsvExport": "PASS",
     "csvUploadAndPreview": "PASS",

@@ -3,11 +3,13 @@ import { test } from "node:test";
 import {
   applyCheckFailure,
   applyCheckResult,
+  candidateReviewMessage,
   clearSession,
   confirmReady,
   createReviewRecord,
   editForRecheck,
   isReadyForExport,
+  reviewProgressMessage,
   selectCandidate,
 } from "../public/review-model.js";
 
@@ -121,6 +123,47 @@ test("candidate changes revoke ready state and require confirmation again", () =
   assert.equal(isReadyForExport(changed), false);
   assert.throws(() => confirmReady(changed, false), /Human confirmation/u);
   assert.equal(confirmReady(changed, true, timestamp).status, "ready");
+});
+
+test("review messaging follows confirmation and candidate changes", () => {
+  const checked = applyCheckResult(createReviewRecord("Springfield", undefined, "messages"), {
+    candidates,
+    policy: reviewPolicy,
+  }, timestamp);
+  assert.match(candidateReviewMessage(checked), /Choose only after comparing/u);
+  assert.match(reviewProgressMessage([checked]), /Review is still required for 1 address/u);
+
+  const ready = confirmReady(selectCandidate(checked, "one", timestamp), true, timestamp);
+  assert.match(candidateReviewMessage(ready), /selected candidate is Ready after explicit confirmation/u);
+  assert.match(reviewProgressMessage([ready]), /It is Ready after explicit human confirmation/u);
+
+  const changed = selectCandidate(ready, "two", timestamp);
+  assert.doesNotMatch(candidateReviewMessage(changed), /is Ready/u);
+  assert.match(candidateReviewMessage(changed), /Choose only after comparing/u);
+  assert.match(reviewProgressMessage([changed]), /Review is still required for 1 address/u);
+});
+
+test("single-candidate and clarification-blocked messaging never misstates readiness", () => {
+  const single = applyCheckResult(createReviewRecord("CN Tower", undefined, "single-message"), {
+    candidates: [candidates[0]],
+    policy: reviewPolicy,
+  }, timestamp);
+  assert.equal(candidateReviewMessage(single), "One candidate was returned. It still needs your confirmation.");
+  const ready = confirmReady(selectCandidate(single, "one", timestamp), true, timestamp);
+  assert.equal(candidateReviewMessage(ready), "One candidate was returned and is Ready after your explicit confirmation.");
+
+  const blocked = applyCheckResult(createReviewRecord("Blocked", undefined, "blocked-message"), {
+    candidates: [candidates[0]],
+    policy: {
+      version: "1.0.0",
+      status: "clarification_required",
+      readyForDispatch: false,
+      reasons: ["candidate_country_mismatch"],
+    },
+  }, timestamp);
+  assert.match(candidateReviewMessage({ ...blocked, status: "ready" }), /needs clarification/u);
+  assert.doesNotMatch(candidateReviewMessage({ ...blocked, status: "ready" }), /is Ready/u);
+  assert.match(reviewProgressMessage([{ ...blocked, status: "ready" }]), /Review is still required/u);
 });
 
 test("clear session removes country, records, imported data, and review state", () => {

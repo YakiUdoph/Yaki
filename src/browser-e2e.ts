@@ -52,6 +52,27 @@ async function main(): Promise<void> {
           },
         };
       }
+      if (address === "Single candidate") {
+        return {
+          status: "needs_review",
+          originalAddress: address,
+          countryCode,
+          candidates: [{
+            formatted: "CN Tower, Toronto, Canada",
+            place_id: "browser-test-single-candidate",
+            country_code: countryCode,
+            confidence: 1,
+            match_type: "full_match",
+            result_type: "building",
+          }],
+          policy: {
+            version: "1.0.0",
+            status: "review_required",
+            readyForDispatch: false,
+            reasons: ["human_confirmation_required"],
+          },
+        };
+      }
       return {
         status: "needs_review",
         originalAddress: address,
@@ -113,11 +134,14 @@ async function main(): Promise<void> {
     await page.locator("#single-address-form").evaluate((form: HTMLFormElement) => form.requestSubmit());
     await page.waitForSelector(".status-needs_review");
     assert.equal(await page.locator(".candidate").count(), 2, "The ambiguous-address flow did not preserve two candidates.");
+    assert.match(await page.locator("#batch-progress").textContent() || "", /Review is still required/u);
 
     await page.locator(".candidate input[type=radio]").first().check();
     await page.locator(".confirm-check input").check();
     await page.locator(".review-controls .button-primary").click();
     await page.waitForSelector(".status-ready");
+    assert.match(await page.locator("#batch-progress").textContent() || "", /It is Ready after explicit human confirmation/u);
+    assert.doesNotMatch(await page.locator(".record-note").first().textContent() || "", /still needs your confirmation/u);
     assert.equal(
       await page.locator("body").innerText().then((text) => text.includes("Ready after explicit human confirmation")),
       true,
@@ -133,6 +157,8 @@ async function main(): Promise<void> {
 
     await page.locator(".candidate input[type=radio]").nth(1).check();
     await page.waitForSelector(".status-needs_review");
+    assert.match(await page.locator("#batch-progress").textContent() || "", /Review is still required/u);
+    assert.doesNotMatch(await page.locator(".record-note").first().textContent() || "", /is Ready/u);
     assert.equal(await page.locator("#export-ready").isDisabled(), true, "Changing a candidate did not revoke ready export.");
     assert.equal(await page.locator(".confirm-check input").isChecked(), false, "Changing a candidate retained confirmation.");
     await page.locator(".confirm-check input").check();
@@ -153,11 +179,34 @@ async function main(): Promise<void> {
     await page.locator("#confirm-clear").click();
     await page.waitForFunction(() => document.querySelectorAll(".record-card").length === 0);
 
+    await page.selectOption("#country-select", "ca");
+    await page.fill("#single-address", "Single candidate");
+    await page.locator("#single-address-form").evaluate((form: HTMLFormElement) => form.requestSubmit());
+    await page.waitForSelector(".status-needs_review");
+    assert.equal(
+      await page.locator(".record-note").first().textContent(),
+      "One candidate was returned. It still needs your confirmation.",
+    );
+    await page.locator(".candidate input[type=radio]").check();
+    await page.locator(".confirm-check input").check();
+    await page.locator(".review-controls .button-primary").click();
+    await page.waitForSelector(".status-ready");
+    assert.equal(
+      await page.locator(".record-note").first().textContent(),
+      "One candidate was returned and is Ready after your explicit confirmation.",
+    );
+
+    await page.locator("#clear-session-button").click();
+    await page.locator("#confirm-clear").click();
+    await page.waitForFunction(() => document.querySelectorAll(".record-card").length === 0);
+
     await page.selectOption("#country-select", "us");
     await page.fill("#single-address", "Countryless candidate");
     await page.locator("#single-address-form").evaluate((form: HTMLFormElement) => form.requestSubmit());
     await page.waitForSelector(".status-needs_review");
     assert.match(await page.locator(".error-box").innerText(), /did not provide country information/u);
+    assert.doesNotMatch(await page.locator(".record-note").first().textContent() || "", /is Ready/u);
+    assert.match(await page.locator("#batch-progress").textContent() || "", /Review is still required/u);
     assert.equal(await page.locator(".review-controls").count(), 0, "Clarification-required response exposed confirmation controls.");
     assert.equal(await page.locator("#export-ready").isDisabled(), true, "Clarification-required response enabled ready export.");
 
@@ -196,8 +245,12 @@ async function main(): Promise<void> {
         ambiguousCandidatesPreserved: "PASS",
         candidateSelection: "PASS",
         explicitHumanConfirmation: "PASS",
+        readyStateMessaging: "PASS",
+        singleCandidateReadyMessaging: "PASS",
         candidateChangeRevokesConfirmation: "PASS",
+        candidateChangeRestoresReviewMessaging: "PASS",
         clarificationRequiredBlocksConfirmationAndReadyExport: "PASS",
+        clarificationRequiredNeverShowsReadyMessaging: "PASS",
         reviewHistory: "PASS",
         readyCsvExport: "PASS",
         csvUploadAndPreview: "PASS",
