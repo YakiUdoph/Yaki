@@ -108,7 +108,8 @@ The integration work also established important boundaries: confidence `1` is no
 ## Tests
 
 ```powershell
-# Unit and HTTP integration suite; no provider quota
+# Automated suite. The credential-gated live case is skipped unless
+# GEOAPIFY_API_KEY is already loaded in this shell; if loaded, it uses one request.
 npm.cmd test
 
 # Real Chrome or Edge interaction through Playwright with an explicit mock; no provider quota
@@ -130,15 +131,17 @@ npm.cmd run test:live-country
 npm.cmd run test:live
 ```
 
-Latest executed local outcomes (2026-10-21, Phase 5A verification):
+Fresh quota-free outcomes (2026-10-21, Phase 5D documentation/evidence validation):
 
 - TypeScript check: **PASS**.
 - Automated suite: **46 passed, 0 failed, 1 credential-gated live test skipped** (47 discovered).
 - Focused Vercel Function contracts: **4 passed, 0 failed**.
-- Browser E2E: **PASS** for keyboard focus, country selection, ambiguous candidates, policy-blocked clarification, candidate-change re-confirmation, ready/unresolved export, 390px layout, and clear session.
-- Clean-profile visual/security browser audit: **PASS**.
+
+The most recent tracked mock browser E2E and clean-profile visual/security audits remain the Phase 5A **PASS** results for keyboard focus, country selection, ambiguous candidates, policy-blocked clarification, candidate-change re-confirmation, ready/unresolved export, 390px layout, clear session, and the documented security checks. Phase 5D did not rerun those scripts because they rewrite tracked evidence artifacts.
 
 Historical live application evidence from 2026-10-19 remains **PASS** for two public addresses; candidates remained `needs_review`, with no automatic approval or credential exposure. That historical result is not evidence for the current production deployment.
+
+A separate production browser verification on 2026-10-21 used exactly one `Springfield`/`US` request. The live application returned ten candidates, kept the row under review, required selection and explicit human confirmation, and exported one Ready CSV row without making a second geocoding request. The sanitized [production evidence](artifacts/production-verification-2026-10-21/README.md) includes three application screenshots, the downloaded CSV, and a clearly identified separate rendering of that CSV. It verifies this one production workflow, not every policy edge case or the exact Vercel deployment-to-commit mapping.
 
 Full evidence and honest failure history are in [docs/phase3-test-report.md](docs/phase3-test-report.md). Screenshots are under `artifacts/screenshots/`.
 
@@ -160,6 +163,7 @@ The application visibly includes `Powered by Geoapify` and `© OpenStreetMap con
 ## Documentation
 
 - [Batch #2 tutorial — Which Springfield?](docs/geoapify-batch2-tutorial.md)
+- [Production Springfield verification — 2026-10-21](artifacts/production-verification-2026-10-21/README.md)
 - [Architecture and data handling](docs/architecture.md)
 - [Demo walkthrough](docs/demo-walkthrough.md)
 - [Final submission draft](docs/final-submission-draft.md)

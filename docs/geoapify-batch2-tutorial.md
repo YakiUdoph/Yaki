@@ -61,18 +61,21 @@ Source: [`artifacts/country-policy-live-results.json`](../artifacts/country-poli
 
 Every candidate had confidence `1`. That is exactly why Yaki does not label confidence as “delivery certainty.” The evidence said that each candidate matched the query well; it did not say which state the sender had in mind. The policy correctly returned `review_required` with `multiple_candidates` and `human_confirmation_required`, and `readyForDispatch` remained `false`.
 
-The project owner later reported exercising the production UI, selecting Springfield, Illinois, checking the human-confirmation statement, and exporting a Ready CSV. That is **USER-REPORTED production evidence**. No tracked screenshot or production test artifact captures that exact selection/export sequence, so this article does not present it as an independently executed test.
+The project owner initially reported exercising the production UI, selecting Springfield, Illinois, checking the human-confirmation statement, and exporting a Ready CSV. That earlier observation remains **USER-REPORTED historical evidence** because no artifact captured that exact session.
 
-### Screenshot evidence still needed
+### Independently captured production browser evidence
 
-The repository contains landing-page, empty-workspace, mobile, and clean-profile security screenshots. It does not contain a screenshot of the live Springfield candidates or Ready export. Before publication, capture these with a clean browser profile and no private data:
+On October 21, 2026, a separate Phase 5C verification captured a later session against the public Yaki application. The browser made exactly one `POST /api/geocode` request for `Springfield` with country `US`; production returned HTTP `200` and ten candidates. The server policy was `review_required`, `readyForDispatch` was `false`, and every displayed candidate had 100% match confidence. The UI still required candidate selection and explicit confirmation before enabling a one-row Ready export. No second geocoding request or browser console error was observed.
 
-1. The five Springfield candidates before selection, with no credentials or browser extensions visible.
-2. Springfield, Illinois selected while the row is still awaiting confirmation.
-3. The Ready state after explicit confirmation.
-4. A text-editor view of the sanitized Ready CSV header and Springfield row.
+The sanitized [production evidence directory](../artifacts/production-verification-2026-10-21/README.md) contains:
 
-Provider results can change, so record the date and avoid treating a future candidate count as a permanent assertion.
+1. a production browser screenshot of all candidates before selection;
+2. Springfield, Illinois selected while the row is still awaiting confirmation;
+3. the Ready state after explicit confirmation;
+4. the downloaded Ready CSV; and
+5. a separately identified local rendering of that CSV, which is not presented as a production-page screenshot.
+
+The earlier saved direct/MCP experiment returned five candidates, while this later production response returned ten. That difference is expected provider variability and is why no future candidate count should be treated as permanent. This production session verifies one successful review/export path; clarification, candidate-change, no-result, and provider-error safeguards remain source/test-verified rather than production-verified by this session.
 
 ## What Yaki does
 
@@ -276,7 +279,7 @@ Commit `ed4fd39` replaced a default object with named `POST`, `GET`, and `HEAD` 
 
 ### 4. A credentialed live check later failed at the network boundary
 
-During Phase 5A on October 21, the one-address credentialed test was attempted twice and returned Yaki's safe `502` network classification both times. No successful response was claimed, and the offline tests remained green.
+**USER-REPORTED historical observation:** during Phase 5A on October 21, the one-address credentialed test was attempted twice and returned Yaki's safe `502` network classification both times. No successful response was claimed, and the quota-free checks remained green. No standalone repository artifact preserves those two attempts.
 
 **Observed symptom:** upstream work did not complete within the available environment.
 
@@ -327,7 +330,8 @@ Open `http://127.0.0.1:4173`. For restart-on-change development, run `npm.cmd ru
 npm.cmd run typecheck
 
 # Unit, HTTP, policy, CSV, and Vercel contract suite.
-# The credentialed live test is skipped when the key is not loaded.
+# The credentialed live case is skipped unless GEOAPIFY_API_KEY is already
+# loaded in this shell. If it is loaded, npm test consumes one provider request.
 npm.cmd test
 
 # Focused Vercel Function contracts, no provider quota
@@ -413,6 +417,7 @@ Geocoding supplied the evidence. The country policy made the comparison safer. T
 - Springfield direct/MCP country-restricted evidence: [`artifacts/country-policy-live-results.json`](../artifacts/country-policy-live-results.json)
 - Earlier paired direct/MCP evidence: [`artifacts/live-contract-results.json`](../artifacts/live-contract-results.json)
 - Two-address local live application evidence: [`artifacts/app-live-e2e-results.json`](../artifacts/app-live-e2e-results.json)
+- One-request production Springfield browser evidence: [`artifacts/production-verification-2026-10-21/`](../artifacts/production-verification-2026-10-21/README.md)
 - Phase 5A browser regression evidence: [`artifacts/browser-e2e-results.json`](../artifacts/browser-e2e-results.json)
 - Clean-profile browser/security evidence: [`artifacts/visual-security-audit.json`](../artifacts/visual-security-audit.json)
 - Direct/MCP findings: [Phase 2 live report](live-contract-report.md) and [MCP feasibility](mcp-feasibility.md)

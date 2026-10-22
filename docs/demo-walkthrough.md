@@ -6,6 +6,8 @@ Yaki uses the [Geoapify location platform](https://www.geoapify.com/) for candid
 
 For the development narrative, Springfield case study, direct API/MCP comparison, and evidence boundaries, read [Which Springfield? Building Yaki, the Last Check Before Dispatch](geoapify-batch2-tutorial.md).
 
+Sanitized evidence from a one-request production Springfield review is available in the [October 21 production verification directory](../artifacts/production-verification-2026-10-21/README.md). It verifies one selection, explicit-confirmation, and Ready-export path, not every edge case or future provider response.
+
 Provider data can change. Candidate text, order, and count below are examples from the recorded 2026-10-19 run, not fixed assertions for future runs.
 
 ## Prerequisites
@@ -87,7 +89,9 @@ The important outcome is the state transition, not a particular candidate count:
 ## Run the reproducible checks
 
 ```powershell
-# Offline unit and HTTP integration suite
+# Install dependencies and run the automated suite.
+# The credential-gated live case is skipped unless GEOAPIFY_API_KEY is already
+# loaded in this shell. If loaded, npm test consumes one provider request.
 npm.cmd ci
 npm.cmd run typecheck
 npm.cmd test
@@ -114,7 +118,7 @@ Expected results from the recorded 2026-10-19 release-candidate run:
 
 The browser test uses an explicit mock and consumes no Geoapify quota. The live test writes sanitized evidence to `artifacts/app-live-e2e-results.json`.
 
-The current Phase 5A automated baseline, executed on 2026-10-21, discovered 47 tests: 46 passed, 0 failed, and the credential-gated live case was skipped. The focused Vercel Function suite passed 4/4, and both browser checks passed. Keep these current results separate from the historical 2026-10-19 results above.
+The fresh Phase 5D quota-free baseline, executed on 2026-10-21 with `GEOAPIFY_API_KEY` explicitly absent, discovered 47 tests: 46 passed, 0 failed, and the credential-gated live case was skipped. TypeScript and the focused Vercel Function suite passed, with the latter passing 4/4. Phase 5D did not rerun the mock browser and security scripts because they rewrite tracked evidence artifacts; their most recent tracked Phase 5A results remain PASS. Keep these results separate from the historical 2026-10-19 live results above.
 
 To check the production deployment:
 
@@ -132,5 +136,6 @@ This command consumes Geoapify quota and writes sanitized evidence. Run it only 
 - `artifacts/screenshots/yaki-workspace.png`
 - `artifacts/browser-e2e-results.json`
 - `artifacts/app-live-e2e-results.json`
+- `artifacts/production-verification-2026-10-21/`
 
-These files show what was observed in the recorded run. They do not establish general address accuracy, delivery success, or future provider behavior.
+These files show what was observed in their dated runs. The production directory distinguishes its three browser screenshots from the separate rendered CSV image. None of the evidence establishes general address accuracy, delivery success, every policy edge case, exact deployment-to-commit mapping, or future provider behavior.
